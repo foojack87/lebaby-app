@@ -4,7 +4,7 @@ import AnchorLink from '../AnchorLink/AnchorLink';
 const Hero = (props) => {
   return (
     <>
-      <section className="sm:py-16 xs:py-8 py-12">
+      <section className="sm:py-16 xs:py-8 py-4">
         <div className={`${styles.innerWidth} mx-auto`}>
           <div className="text-center flex flex-col gap-12">
             <h1 className={`${styles.heroHeading}`}>
@@ -22,7 +22,7 @@ const Hero = (props) => {
             <div>
               <AnchorLink
                 href="/BabyProfile"
-                className="bg-[#a509ff] px-24 py-6 text-xl"
+                className="bg-[#a509ff] sm:px-18 px-8 py-6 text-xl"
               >
                 Start Now
               </AnchorLink>

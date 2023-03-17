@@ -14,6 +14,7 @@ const Footer = (props) => {
                 width="168"
                 height="24"
                 alt="logo"
+                className="sm:w-[168px] w-[128px]"
               />
               <p className="font-normal text-[14px] text-[#25618B] opacity-50">
                 Copyright © 2022 - 2023 LeBaby. All rights reserved.
