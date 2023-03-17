@@ -1,5 +1,6 @@
 import styles from '@/styles';
-import UserButton from '../UserButton/UserButton';
+import AnchorLink from '../AnchorLink/AnchorLink';
+
 const Hero = (props) => {
   return (
     <>
@@ -19,9 +20,12 @@ const Hero = (props) => {
               activities.
             </h1>
             <div>
-              <UserButton className="bg-[#a509ff] px-24 py-6 text-xl">
+              <AnchorLink
+                href="/BabyProfile"
+                className="bg-[#a509ff] px-24 py-6 text-xl"
+              >
                 Start Now
-              </UserButton>
+              </AnchorLink>
             </div>
           </div>
         </div>
