@@ -17,6 +17,7 @@ function AnchorLink({ children, href, className }) {
       onClick={handleClick}
       className={
         `shadow-md inline-flex items-center uppercase border border-transparent rounded-md font-semibold text-white tracking-widesttransition ease-in-out duration-150 bg-[#a509ff] hover:bg-[#34acc7] hover:-translate-y-0.5` +
+        ' ' +
         className
       }
     >

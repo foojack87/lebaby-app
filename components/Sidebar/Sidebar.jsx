@@ -1,7 +1,5 @@
-import styles from '@/styles';
 import { useState } from 'react';
 import { BiChevronLeft } from 'react-icons/bi';
-import AnchorLink from '../AnchorLink/AnchorLink';
 import SidebarData from './SidebarData';
 import UserProfile from '../UserProfile/UserProfile';
 

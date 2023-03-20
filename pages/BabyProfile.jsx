@@ -1,6 +1,6 @@
-import Sidebar from '@/components/Sidebar/Sidebar';
+import AnchorLink from '@/components/AnchorLink/AnchorLink';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSetUser, useUser } from '../context/UserContext';
 
 const BabyProfile = (props) => {
@@ -21,7 +21,16 @@ const BabyProfile = (props) => {
 
   return (
     <>
-      <section>this is the baby profile</section>
+      <section className="w-full h-full">
+        <div className="flex flex-col gap-4 items-center justify-center">
+          <p className="text-[1.4rem]">
+            No baby found, start now by pressing the button below!
+          </p>
+          <AnchorLink href="/CreateBaby" className="px-4 py-2">
+            Create Profile
+          </AnchorLink>
+        </div>
+      </section>
     </>
   );
 };
