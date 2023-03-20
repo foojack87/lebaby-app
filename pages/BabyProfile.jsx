@@ -1,3 +1,4 @@
+import Sidebar from '@/components/Sidebar/Sidebar';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { useState, useEffect } from 'react';
 import { useSetUser, useUser } from '../context/UserContext';
@@ -20,9 +21,7 @@ const BabyProfile = (props) => {
 
   return (
     <>
-      <div>THIS THE IS BABYPROFILE PAGE AFTER LOGGING IN.</div>
-      <div onClick={onClickHandler}>user data</div>
-      {!user ? <div>not logged in.</div> : <div>logged in</div>}
+      <section>this is the baby profile</section>
     </>
   );
 };
