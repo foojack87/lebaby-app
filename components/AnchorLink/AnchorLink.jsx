@@ -8,7 +8,6 @@ function AnchorLink({ children, href, className }) {
   const handleClick = (e) => {
     e.preventDefault();
     router.push(href);
-    console.log(user.id);
   };
 
   return (

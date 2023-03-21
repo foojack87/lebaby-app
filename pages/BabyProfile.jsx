@@ -1,6 +1,6 @@
 import AnchorLink from '@/components/AnchorLink/AnchorLink';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSetUser, useUser } from '../context/UserContext';
 
 const BabyProfile = (props) => {
@@ -13,17 +13,13 @@ const BabyProfile = (props) => {
       const getUserJson = await getUser.json();
       setUser(getUserJson);
     })();
-  }, [user.id, setUser]);
-
-  const onClickHandler = (props) => {
-    console.log(user);
-  };
+  }, []);
 
   return (
     <>
-      <section className="w-full h-full">
+      <section className="w-[54rem] h-full ml-4">
         <div className="flex flex-col gap-4 items-center justify-center">
-          <p className="text-[1.4rem]">
+          <p className="sm:text-[1.2rem] md:text-[1.4rem] text-[0.8rem] text-center">
             No baby found, start now by pressing the button below!
           </p>
           <AnchorLink href="/CreateBaby" className="px-4 py-2">

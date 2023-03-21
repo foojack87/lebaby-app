@@ -13,11 +13,13 @@ const SidebarData = ({ toggle }) => {
               toggle ? 'last:w-[3.6rem]' : 'last:w-[17rem]'
             } sidebar last:absolute left-4 bottom-4`}
           >
-            <div className="mr-8 text-[1.7rem] text-brown">{link.icon}</div>
+            <div className="mr-8 sm:text-[1.7rem] text-[1.2rem] text-brown">
+              {link.icon}
+            </div>
             <div
               className={`${
                 toggle ? 'opacity-0' : ''
-              } text-[1rem] text-brown whitespace-pre`}
+              } sm:text-[1rem] text-[0.8rem] text-brown whitespace-pre`}
             >
               {link.text}
             </div>

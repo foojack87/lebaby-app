@@ -13,12 +13,14 @@ const Sidebar = (props) => {
 
   return (
     <div
-      className={`${toggle ? 'w-[5.8rem]' : 'w-[14rem]'} sidebar-container `}
+      className={`${
+        toggle ? 'w-[5.8rem]' : 'sm:w-[12rem] md:w-[14rem] w-[10rem]'
+      } sidebar-container `}
     >
       <UserProfile toggle={toggle} />
       <SidebarData toggle={toggle} />
       <div
-        className="absolute top-[12rem] -right-5 flex justify-center items-center  w-10 h-10 bg-[glass] rounded-full cursor-pointer"
+        className="absolute top-[12rem] -right-5 flex justify-center items-center w-10 h-10 bg-[glass] rounded-full cursor-pointer"
         onClick={toggleHandler}
       >
         <BiChevronLeft

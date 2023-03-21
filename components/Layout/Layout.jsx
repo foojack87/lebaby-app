@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
       <main
         className={`${styles.innerWidth} mx-auto sm:px-16 px-6 min-h-[70vh]`}
       >
-        <div className="object-cover sm:flex items-center">
+        <div className="object-cover sm:flex items-center justify-between">
           {user && <Sidebar />}
           {children}
         </div>
