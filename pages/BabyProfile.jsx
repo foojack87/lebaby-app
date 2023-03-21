@@ -2,18 +2,28 @@ import AnchorLink from '@/components/AnchorLink/AnchorLink';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { useEffect, useState } from 'react';
 import { useSetUser, useUser } from '../context/UserContext';
+import useSWR from 'swr';
+import useUserData from '@/utils/useUserData';
 
-const BabyProfile = (props) => {
-  const setUser = useSetUser();
-  const user = useUser();
+const BabyProfile = ({ id }) => {
+  // const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  // const { data, error, isLoading } = useSWR(`/api/user/`, fetcher);
+  // console.log(data);
 
-  useEffect(() => {
-    (async () => {
-      const getUser = await fetch('/api/user');
-      const getUserJson = await getUser.json();
-      setUser(getUserJson);
-    })();
-  }, []);
+  const { user, error, isLoading } = useUserData();
+  console.log(user);
+
+  // const user = useUser();
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const getUser = await fetch('/api/user');
+  //     const getUserJson = await getUser.json();
+  //     setUser(getUserJson);
+  //   })();
+  // }, []);
+
+  // console.log(user);
 
   return (
     <>

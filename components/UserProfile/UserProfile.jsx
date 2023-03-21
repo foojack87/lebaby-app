@@ -1,9 +1,14 @@
 import profilepic from '../../public/55.jpg';
-import { useUser } from '../../context/UserContext';
+import useUserData from '@/utils/useUserData';
+// import { useUser } from '../../context/UserContext';
 import Image from 'next/image';
 
 const UserProfile = ({ toggle }) => {
-  const user = useUser();
+  const { user, error, isLoading } = useUserData();
+  console.log(user);
+
+  if (isLoading) return <div>loading...</div>;
+  if (error) return <div>error</div>;
 
   return (
     <div

@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import useUserData from '@/utils/useUserData';
 import { useSetUser, useUser } from '../context/UserContext';
 import { useEffect } from 'react';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
