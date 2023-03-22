@@ -1,124 +1,179 @@
 import { useForm } from 'react-hook-form';
-import { useSetUser } from '../../context/UserContext';
+import { useRouter } from 'next/router';
 import useUserData from '@/utils/useUserData';
-import { useEffect } from 'react';
+import { useState } from 'react';
 
 const BabyForm = (props) => {
+  const router = useRouter();
   const { user, error, isLoading } = useUserData();
-  console.log(user);
+  const { register, handleSubmit, setValue } = useForm({
+    defaultValues: {
+      firstName: 'Kyson',
+      lastName: 'Foo',
+      height: 55,
+      weight: 2980,
+      head: 28,
+      birthday: new Date(Date.now()).toJSON(),
+    },
+  });
 
-  const { register, handleSubmit } = useForm();
+  const [inputDisabled, setInputDisabled] = useState(false);
+  const [baby, setBaby] = useState([]);
+
+  const onSubmitBaby = async (data) => {
+    setInputDisabled(true);
+    const baby = {
+      postedAt: Date.now(),
+      body: data,
+      user: {
+        id: user.id,
+        name: user.name,
+        nickname: user.nickname,
+        picture: user.picture,
+      },
+    };
+    const response = await fetch('/api/flutter', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(baby),
+    });
+
+    const responseJson = await response.json();
+
+    setBaby((babies) => [
+      {
+        _id: responseJson.insertedId,
+        ...baby,
+      },
+      ...babies,
+    ]);
+    setInputDisabled(false);
+  };
+
+  // const onSubmit = (data) => console.log(new Date(data.birthday).toJSON());
+  // console.log(new Date(Date.now()).toJSON());
 
   return (
     <>
-      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 font-bold mb-2"
-            htmlFor="username"
-          >
-            Username
-          </label>
+      <form
+        className="py-8 pr-12 sm:pl-0 pl-12"
+        onSubmit={handleSubmit(onSubmitBaby)}
+      >
+        <div className="grid grid-cols-2 gap-5">
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="username"
             type="text"
-            placeholder="Enter your username"
+            placeholder="Firstname"
+            className="border border-gray-400 py-1 px-2"
+            id="firstname"
+            {...register('firstName', { required: true, maxLength: 20 })}
           />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
-            Email
-          </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="email"
-            type="email"
-            placeholder="Enter your email"
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 font-bold mb-2"
-            htmlFor="password"
-          >
-            Password
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="password"
-            type="password"
-            placeholder="Enter your password"
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 font-bold mb-2"
-            htmlFor="confirm-password"
-          >
-            Confirm Password
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="confirm-password"
-            type="password"
-            placeholder="Confirm your password"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="phone">
-            Phone
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="phone"
-            type="tel"
-            placeholder="Enter your phone number"
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 font-bold mb-2"
-            htmlFor="address"
-          >
-            Address
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="address"
             type="text"
-            placeholder="Enter your address"
+            placeholder="Lastname"
+            className="border border-gray-400 py-1 px-2"
+            id="lastname"
+            {...register('lastName', {
+              required: true,
+              maxLength: 20,
+              pattern: /^[A-Za-z]+$/i,
+            })}
           />
         </div>
-        <div className="flex items-center justify-between">
+        <div className="grid grid-cols-2 gap-5 mt-5">
+          <input
+            type="number"
+            placeholder="Height: 60 (cm)"
+            className="border border-gray-400 p-1.5 text-sm"
+            id="height"
+            {...register('height', {
+              required: true,
+              maxLength: 2,
+              minLength: 2,
+            })}
+          />
+          <input
+            type="number"
+            placeholder="Weight: 3150 (g)"
+            className="border border-gray-400 p-1.5 text-sm"
+            id="weight"
+            {...register('weight', {
+              required: true,
+              maxLength: 3,
+              minLength: 4,
+            })}
+          />
+        </div>
+        <div className="mt-5">
+          <input
+            type="number"
+            placeholder="Head Circumfrence: 34 (cm)"
+            className="border border-gray-400 py-1 px-2 w-full"
+            id="head"
+            {...register('head', {
+              required: true,
+              maxLength: 2,
+              minLength: 2,
+            })}
+          />
+        </div>
+        <div className="mt-5">
+          <input
+            type="date"
+            placeholder="Birth Date (MM/DD/YYYY)"
+            className="border border-gray-400 py-1 px-2 w-full"
+            id="bday"
+            {...register('birthday')}
+          />
+        </div>
+        <div className="flex mt-5 border rounded-full overflow-hidden select-none ">
+          <div className=" px-2 py-1 bg-purple-500 text-white text-sm font-semibold mr-3">
+            Gender
+          </div>
+          <div className="flex mx-auto w-full justify-between">
+            <label className="flex radio cursor-pointer place-items-center">
+              <input
+                className="transform scale-95"
+                type="radio"
+                value="boy"
+                id="field-boy"
+                {...register('gender')}
+              />
+              <div className="pl-1 pr-2 text-[0.8rem]">Boy</div>
+            </label>
+            <label className="flex radio cursor-pointer place-items-center">
+              <input
+                className="transform scale-95"
+                type="radio"
+                value="girl"
+                id="field-girl"
+                {...register('gender')}
+              />
+              <div className="pl-1 pr-2 text-[0.8rem]">Girl</div>
+            </label>
+            <label className="flex radio cursor-pointer place-items-center">
+              <input
+                className="transform scale-95"
+                type="radio"
+                value="neutral"
+                id="field-neutral"
+                {...register('gender')}
+              />
+              <div className="pl-1 pr-4 text-[0.8rem]">Neutral</div>
+            </label>
+          </div>
+        </div>
+        <div className="mt-5">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="w-full border rounded bg-purple-500 py-3 text-center text-white"
             type="submit"
+            disabled={inputDisabled}
           >
-            Sign Up
+            Done
           </button>
         </div>
       </form>
-
-      {/* <form
-        onSubmit={handleSubmit(() => {
-          console.log(data);
-        })}
-      >
-        <label>First Name</label>
-        <input name="firstName" placeholder="Baby's first name"></input>
-        <label>Last Name</label>
-        <input name="lastName" placeholder="Baby's last name"></input>
-        <label>Gender</label>
-        <input name="gender" placeholder="Boy/Girl/Undecided"></input>
-        <label>Birth Date</label>
-        <input name="birthDate" placeholder="Birth Date"></input>
-        <label>Height</label>
-        <input name="height" placeholder="height"></input>
-        <label>Weight</label>
-        <input name="weight" placeholder="weight"></input>
-        <input type="submit" />
-      </form> */}
     </>
   );
 };

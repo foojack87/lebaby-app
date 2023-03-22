@@ -7,6 +7,8 @@ import { useUser } from '@auth0/nextjs-auth0/client';
 const Layout = ({ children }) => {
   const { user, error, isLoading } = useUser();
 
+  if (isLoading) return <div>loading...</div>;
+
   return (
     <>
       <NavBar />
