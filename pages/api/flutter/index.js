@@ -20,6 +20,7 @@ export default withApiAuthRequired(async function handler(req, res) {
   try {
     switch (req.method) {
       case 'GET':
+        const id = req.query.babyId;
         const readData = await fetch(`${baseUrl}/find`, {
           ...fetchOptions,
           body: JSON.stringify({

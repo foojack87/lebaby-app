@@ -1,14 +1,15 @@
 import Head from 'next/head';
-import useUserData from '@/utils/useUserData';
-import { useSetUser, useUser } from '../context/UserContext';
-import { useEffect } from 'react';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import { UserProvider as AtlasUserProvider } from '../context/UserContext';
 import Layout from '@/components/Layout/Layout';
 import '@/styles/globals.css';
+import useBabyData from '@/utils/useBabyData';
+import useUserData from '@/utils/useUserData';
 
 export default function App(props) {
   const { Component, pageProps } = props;
+  const { baby, babyLoading } = useBabyData();
+  const { user, userLoading } = useUserData();
 
   return (
     <>
@@ -21,8 +22,14 @@ export default function App(props) {
       </Head>
       <UserProvider>
         <AtlasUserProvider>
-          <Layout>
-            <Component {...pageProps} />
+          <Layout babies={baby} users={user}>
+            <Component
+              {...pageProps}
+              babies={baby}
+              users={user}
+              babyLoading={babyLoading}
+              userLoading={userLoading}
+            />
           </Layout>
         </AtlasUserProvider>
       </UserProvider>

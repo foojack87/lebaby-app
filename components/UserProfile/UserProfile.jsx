@@ -1,13 +1,12 @@
 import profilepic from '../../public/55.jpg';
 import useUserData from '@/utils/useUserData';
-// import { useUser } from '../../context/UserContext';
 import Image from 'next/image';
 
 const UserProfile = ({ toggle }) => {
-  const { user, error, isLoading } = useUserData();
+  const { user, error, userLoading } = useUserData();
   console.log(user);
 
-  if (isLoading) return <div>loading...</div>;
+  if (userLoading) return <div>loading...</div>;
   if (error) return <div>error</div>;
 
   return (

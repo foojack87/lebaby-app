@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import useUserData from '@/utils/useUserData';
 import { useState } from 'react';
 
-const BabyForm = (props) => {
+const BabyForm = ({ babies }) => {
   const router = useRouter();
   const { user, error, isLoading } = useUserData();
   const { register, handleSubmit, setValue } = useForm({
@@ -50,6 +50,7 @@ const BabyForm = (props) => {
       ...babies,
     ]);
     setInputDisabled(false);
+    router.reload();
   };
 
   // const onSubmit = (data) => console.log(new Date(data.birthday).toJSON());
