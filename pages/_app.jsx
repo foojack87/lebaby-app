@@ -8,7 +8,6 @@ import useUserData from '@/utils/useUserData';
 
 export default function App(props) {
   const { Component, pageProps } = props;
-  const { baby, babyLoading } = useBabyData();
   const { user, userLoading } = useUserData();
 
   return (
@@ -22,14 +21,8 @@ export default function App(props) {
       </Head>
       <UserProvider>
         <AtlasUserProvider>
-          <Layout babies={baby} users={user}>
-            <Component
-              {...pageProps}
-              babies={baby}
-              users={user}
-              babyLoading={babyLoading}
-              userLoading={userLoading}
-            />
+          <Layout users={user}>
+            <Component {...pageProps} users={user} userLoading={userLoading} />
           </Layout>
         </AtlasUserProvider>
       </UserProvider>

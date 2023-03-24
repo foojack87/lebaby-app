@@ -18,7 +18,6 @@ const BabyForm = ({ babies }) => {
   });
 
   const [inputDisabled, setInputDisabled] = useState(false);
-  const [baby, setBaby] = useState([]);
 
   const onSubmitBaby = async (data) => {
     setInputDisabled(true);
@@ -42,15 +41,15 @@ const BabyForm = ({ babies }) => {
 
     const responseJson = await response.json();
 
-    setBaby((babies) => [
-      {
-        _id: responseJson.insertedId,
-        ...baby,
-      },
-      ...babies,
-    ]);
+    // setBaby((babies) => [
+    //   {
+    //     _id: responseJson.insertedId,
+    //     ...baby,
+    //   },
+    //   ...babies,
+    // ]);
     setInputDisabled(false);
-    router.reload();
+    router.push('/BabyProfile');
   };
 
   // const onSubmit = (data) => console.log(new Date(data.birthday).toJSON());
@@ -60,7 +59,7 @@ const BabyForm = ({ babies }) => {
     <>
       <form
         className="py-8 pr-12 sm:pl-0 pl-12"
-        onSubmit={handleSubmit(onSubmitBaby)}
+        onSubmit={handleSubmit((value) => onSubmitBaby(value))}
       >
         <div className="grid grid-cols-2 gap-5">
           <input
