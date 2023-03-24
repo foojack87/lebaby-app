@@ -2,16 +2,16 @@ import AnchorLink from '@/components/AnchorLink/AnchorLink';
 import BabyInfo from '@/components/BabyInfo/BabyInfo';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 
-const BabyProfile = ({ babies, users, babyLoading }) => {
-  console.log(babies, users);
+const BabyProfile = ({ users, userLoading }) => {
+  console.log(users);
 
-  if (babyLoading) return <div>loading...</div>;
+  if (userLoading) return <div>loading...</div>;
 
   return (
     <>
       <section className="w-[54rem] h-full ml-4">
-        {babies && babies.length > 0 ? (
-          <BabyInfo userBaby={babies} users={users} />
+        {users && users.baby ? (
+          <BabyInfo users={users} />
         ) : (
           <div className="flex flex-col gap-4 items-center justify-center">
             <p className="sm:text-[1.2rem] md:text-[1.4rem] text-[0.8rem] text-center">

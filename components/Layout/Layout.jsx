@@ -4,7 +4,7 @@ import Footer from '../Footer/Footer';
 import styles from '@/styles';
 import { useUser } from '@auth0/nextjs-auth0/client';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, users, userLoading }) => {
   const { user, error, isLoading } = useUser();
 
   if (isLoading) return <div>loading...</div>;
@@ -16,7 +16,9 @@ const Layout = ({ children }) => {
         className={`${styles.innerWidth} mx-auto sm:px-16 px-6 min-h-[70vh]`}
       >
         <div className="object-cover sm:flex items-center justify-between">
-          {user && <Sidebar />}
+          {user && (
+            <Sidebar users={users} userLoading={userLoading} error={error} />
+          )}
           {children}
         </div>
       </main>

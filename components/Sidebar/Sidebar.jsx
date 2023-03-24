@@ -4,11 +4,10 @@ import SidebarData from './SidebarData';
 import UserProfile from '../UserProfile/UserProfile';
 
 const Sidebar = (props) => {
-  const [toggle, setToggle] = useState(false);
+  const [toggle, setToggle] = useState(true);
 
   const toggleHandler = () => {
     setToggle(!toggle);
-    console.log(toggle);
   };
 
   return (

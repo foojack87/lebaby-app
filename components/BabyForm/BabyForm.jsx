@@ -3,9 +3,9 @@ import { useRouter } from 'next/router';
 import useUserData from '@/utils/useUserData';
 import { useState } from 'react';
 
-const BabyForm = ({ babies }) => {
+const BabyForm = ({ users }) => {
   const router = useRouter();
-  const { user, error, isLoading } = useUserData();
+  console.log(users._id);
   const { register, handleSubmit, setValue } = useForm({
     defaultValues: {
       firstName: 'Kyson',
@@ -22,17 +22,18 @@ const BabyForm = ({ babies }) => {
   const onSubmitBaby = async (data) => {
     setInputDisabled(true);
     const baby = {
+      _id: users._id,
       postedAt: Date.now(),
-      body: data,
-      user: {
-        id: user.id,
-        name: user.name,
-        nickname: user.nickname,
-        picture: user.picture,
-      },
+      baby: data,
+      // user: {
+      //   id: user.id,
+      //   name: user.name,
+      //   nickname: user.nickname,
+      //   picture: user.picture,
+      // },
     };
-    const response = await fetch('/api/flutter', {
-      method: 'POST',
+    const response = await fetch('/api/user', {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -40,6 +41,7 @@ const BabyForm = ({ babies }) => {
     });
 
     const responseJson = await response.json();
+    console.log(responseJson);
 
     // setBaby((babies) => [
     //   {
@@ -49,7 +51,7 @@ const BabyForm = ({ babies }) => {
     //   ...babies,
     // ]);
     setInputDisabled(false);
-    router.push('/BabyProfile');
+    window.location.href = '/BabyProfile';
   };
 
   // const onSubmit = (data) => console.log(new Date(data.birthday).toJSON());
@@ -59,7 +61,7 @@ const BabyForm = ({ babies }) => {
     <>
       <form
         className="py-8 pr-12 sm:pl-0 pl-12"
-        onSubmit={handleSubmit((value) => onSubmitBaby(value))}
+        onSubmit={handleSubmit(onSubmitBaby)}
       >
         <div className="grid grid-cols-2 gap-5">
           <input

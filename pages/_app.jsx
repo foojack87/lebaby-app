@@ -3,12 +3,11 @@ import { UserProvider } from '@auth0/nextjs-auth0/client';
 import { UserProvider as AtlasUserProvider } from '../context/UserContext';
 import Layout from '@/components/Layout/Layout';
 import '@/styles/globals.css';
-import useBabyData from '@/utils/useBabyData';
 import useUserData from '@/utils/useUserData';
 
 export default function App(props) {
   const { Component, pageProps } = props;
-  const { user, userLoading } = useUserData();
+  const { user, userLoading, error } = useUserData();
 
   return (
     <>
@@ -21,8 +20,13 @@ export default function App(props) {
       </Head>
       <UserProvider>
         <AtlasUserProvider>
-          <Layout users={user}>
-            <Component {...pageProps} users={user} userLoading={userLoading} />
+          <Layout users={user} userLoading={userLoading} error={error}>
+            <Component
+              {...pageProps}
+              users={user}
+              userLoading={userLoading}
+              error={error}
+            />
           </Layout>
         </AtlasUserProvider>
       </UserProvider>

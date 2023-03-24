@@ -80,6 +80,7 @@ export default withApiAuthRequired(async function handler(req, res) {
               $set: {
                 nickname: req.body.nickname,
                 picture: req.body.picture,
+                postedAt: req.body.postedAt,
                 baby: req.body.baby,
               },
             },
