@@ -25,12 +25,6 @@ const BabyForm = ({ users }) => {
       _id: users._id,
       postedAt: Date.now(),
       baby: data,
-      // user: {
-      //   id: user.id,
-      //   name: user.name,
-      //   nickname: user.nickname,
-      //   picture: user.picture,
-      // },
     };
     const response = await fetch('/api/user', {
       method: 'PUT',
@@ -43,19 +37,9 @@ const BabyForm = ({ users }) => {
     const responseJson = await response.json();
     console.log(responseJson);
 
-    // setBaby((babies) => [
-    //   {
-    //     _id: responseJson.insertedId,
-    //     ...baby,
-    //   },
-    //   ...babies,
-    // ]);
     setInputDisabled(false);
     window.location.href = '/BabyProfile';
   };
-
-  // const onSubmit = (data) => console.log(new Date(data.birthday).toJSON());
-  // console.log(new Date(Date.now()).toJSON());
 
   return (
     <>

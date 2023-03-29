@@ -3,23 +3,33 @@ import moment from 'moment';
 import { useState, useEffect, useRef } from 'react';
 import 'react-datetime/css/react-datetime.css';
 
-const ActivityForm = ({ onEventAdded }) => {
+const ActivityForm = ({ onEventAdded, users }) => {
   const [title, setTitle] = useState('');
   const [start, setStart] = useState(new Date());
   const [end, setEnd] = useState(new Date());
 
   const [inputDisabled, setInputDisabled] = useState(false);
 
-  const onSubmitActivity = (e) => {
+  const onSubmitActivity = async (e) => {
     e.preventDefault();
 
-    onEventAdded({
-      title,
-      start,
-      end,
+    const event = {
+      _id: users._id,
+      activity: { title, start, end },
+    };
+
+    const response = await fetch('/api/user', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(event),
     });
 
-    setInputDisabled(true);
+    const responseJson = await response.json();
+    console.log(responseJson);
+
+    setInputDisabled(false);
   };
 
   return (
@@ -57,7 +67,7 @@ const ActivityForm = ({ onEventAdded }) => {
             }}
           />
         </div>
-        <button>Add activity</button>
+        <button disabled={inputDisabled}>Add activity</button>
       </form>
     </div>
   );

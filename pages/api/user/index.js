@@ -82,6 +82,7 @@ export default withApiAuthRequired(async function handler(req, res) {
                 picture: req.body.picture,
                 postedAt: req.body.postedAt,
                 baby: req.body.baby,
+                activity: req.body.activity,
               },
             },
           }),
