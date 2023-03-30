@@ -18,7 +18,7 @@ const BabyDailies = ({ users, userLoading }) => {
 
   return (
     <>
-      <ActivityForm users={users} />
+      <ActivityForm users={users} events={events} />
       <div className="w-[45%]">
         <FullCalendar
           initialEvents={events}

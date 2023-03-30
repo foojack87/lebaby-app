@@ -1,21 +1,26 @@
 import Datetime from 'react-datetime';
 import moment from 'moment';
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import 'react-datetime/css/react-datetime.css';
 
-const ActivityForm = ({ onEventAdded, users }) => {
+const ActivityForm = ({ users, events }) => {
   const [title, setTitle] = useState('');
   const [start, setStart] = useState(new Date());
   const [end, setEnd] = useState(new Date());
 
   const [inputDisabled, setInputDisabled] = useState(false);
 
+  // get existing events through props.
+  // pass the existing events + new event through PUT
+
   const onSubmitActivity = async (e) => {
     e.preventDefault();
 
+    const newEvent = { title, start, end };
+
     const event = {
       _id: users._id,
-      activity: { title, start, end },
+      activity: { newEvent },
     };
 
     const response = await fetch('/api/user', {
