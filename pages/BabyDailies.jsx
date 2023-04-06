@@ -15,7 +15,7 @@ const BabyDailies = ({ users, userLoading }) => {
   const userEvents = users.activity === undefined ? '' : users.activity;
   console.log(userEvents);
   const displayEvents =
-    userEvents?.length > 1 ? userEvents?.flat(200) : [userEvents];
+    userEvents?.length > 1 ? userEvents?.flat(200) : userEvents;
   console.log(displayEvents);
 
   const handleEventClick = (clickInfo) => {

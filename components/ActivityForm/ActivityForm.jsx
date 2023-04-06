@@ -23,28 +23,25 @@ const ActivityForm = ({ users, events }) => {
     setEnd(moment(date).toDate());
   };
 
+  // useEffect(() => {
+  //   setEvent(events);
+  // }, [events]);
+
+  console.log(event);
+
   const onSubmitActivity = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
 
-    // setEvent((prevState) => {
-    //   return [...prevState, { title, start, end }];
-    // });
+    const newEvent = [...event, { title, start, end, id: Date.now() }];
 
-    // const newEvent = event;
+    setEvent(newEvent);
 
-    // console.log(newEvent);
+    console.log(event);
 
-    // const inputEvent = {
-    //   _id: users._id,
-    //   activity: newEvent,
-    // };
-
-    // console.log(inputEvent);
-
-    const newEvents =
-      users.activity === undefined
-        ? { title, start, end, id: Date.now() }
-        : [users.activity, { title, start, end, id: Date.now() }];
+    // const newEvents =
+    //   users.activity === undefined
+    //     ? { title, start, end, id: Date.now() }
+    //     : [users.activity, { title, start, end, id: Date.now() }];
 
     const response = await fetch('/api/user', {
       method: 'PUT',
@@ -53,7 +50,7 @@ const ActivityForm = ({ users, events }) => {
       },
       body: JSON.stringify({
         _id: users._id,
-        activity: newEvents,
+        activity: newEvent,
       }),
     });
 
