@@ -7,6 +7,8 @@ const BabyProfile = ({ users, userLoading }) => {
 
   if (userLoading) return <div>loading...</div>;
 
+  // Refactor nested ternary operator
+
   return (
     <>
       <section className="w-[54rem] h-full ml-4">

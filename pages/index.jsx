@@ -11,7 +11,7 @@ export default function Home({ babies, users }) {
     if (user) {
       router.push('/BabyProfile');
     }
-  }, [user]);
+  });
 
   return (
     <>

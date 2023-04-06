@@ -10,18 +10,36 @@ import ActivityForm from '@/components/ActivityForm/ActivityForm';
 const BabyDailies = ({ users, userLoading }) => {
   if (userLoading) return <div>Loading...</div>;
 
-  let events = [];
+  // fix this.
 
-  const event = users.activity;
-  events.push(event);
-  console.log(events);
+  const userEvents = users.activity === undefined ? '' : users.activity;
+  console.log(userEvents);
+  const displayEvents =
+    userEvents?.length > 1 ? userEvents?.flat(200) : [userEvents];
+  console.log(displayEvents);
+
+  const handleEventClick = (clickInfo) => {
+    if (
+      confirm(
+        `Are you sure you want to delete the event '${clickInfo.event.title}'`
+      )
+    ) {
+      console.log(clickInfo.event.id);
+    }
+  };
 
   return (
     <>
-      <ActivityForm users={users} events={events} />
+      <ActivityForm
+        users={users}
+        events={userEvents}
+        userLoading={userLoading}
+      />
       <div className="w-[45%]">
         <FullCalendar
-          initialEvents={events}
+          initialEvents={
+            users.activity === undefined ? userEvents : displayEvents
+          }
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={{
             left: 'prev,next today',
@@ -34,6 +52,7 @@ const BabyDailies = ({ users, userLoading }) => {
           selectMirror={true}
           dayMaxEvents={true}
           weekends={true}
+          eventClick={handleEventClick}
         />
       </div>
     </>

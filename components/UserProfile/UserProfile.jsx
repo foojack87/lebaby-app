@@ -9,6 +9,8 @@ const UserProfile = ({ toggle }) => {
   if (userLoading) return <div>loading...</div>;
   if (error) return <div>error</div>;
 
+  // refactor nested ternary operator
+
   return (
     <div
       className={`flex gap-3 items-center ${

@@ -1,37 +1,63 @@
 import Datetime from 'react-datetime';
 import moment from 'moment';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import 'react-datetime/css/react-datetime.css';
 
 const ActivityForm = ({ users, events }) => {
   const [title, setTitle] = useState('');
   const [start, setStart] = useState(new Date());
   const [end, setEnd] = useState(new Date());
-
+  const [event, setEvent] = useState(events);
   const [inputDisabled, setInputDisabled] = useState(false);
 
   // get existing events through props.
   // pass the existing events + new event through PUT
 
+  const titleChangeHandler = (title) => {
+    setTitle(title.target.value);
+  };
+  const startChangeHandler = (date) => {
+    setStart(moment(date).toDate());
+  };
+  const endChangeHandler = (date) => {
+    setEnd(moment(date).toDate());
+  };
+
   const onSubmitActivity = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
-    const newEvent = { title, start, end };
+    // setEvent((prevState) => {
+    //   return [...prevState, { title, start, end }];
+    // });
 
-    const event = {
-      _id: users._id,
-      activity: { newEvent },
-    };
+    // const newEvent = event;
+
+    // console.log(newEvent);
+
+    // const inputEvent = {
+    //   _id: users._id,
+    //   activity: newEvent,
+    // };
+
+    // console.log(inputEvent);
+
+    const newEvents =
+      users.activity === undefined
+        ? { title, start, end, id: Date.now() }
+        : [users.activity, { title, start, end, id: Date.now() }];
 
     const response = await fetch('/api/user', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(event),
+      body: JSON.stringify({
+        _id: users._id,
+        activity: newEvents,
+      }),
     });
 
-    const responseJson = await response.json();
+    const responseJson = response.json();
     console.log(responseJson);
 
     setInputDisabled(false);
@@ -51,26 +77,16 @@ const ActivityForm = ({ users, events }) => {
             type="text"
             id="title"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={titleChangeHandler}
           />
         </div>
         <div>
           <label>Started</label>
-          <Datetime
-            value={start}
-            onChange={(date) => {
-              setStart(moment(date).toDate());
-            }}
-          />
+          <Datetime value={start} onChange={startChangeHandler} />
         </div>
         <div>
           <label>Ended</label>
-          <Datetime
-            value={end}
-            onChange={(date) => {
-              setEnd(moment(date).toDate());
-            }}
-          />
+          <Datetime value={end} onChange={endChangeHandler} />
         </div>
         <button disabled={inputDisabled}>Add activity</button>
       </form>

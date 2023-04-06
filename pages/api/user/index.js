@@ -91,6 +91,28 @@ export default withApiAuthRequired(async function handler(req, res) {
         const updateDataJson = await updateData.json();
         res.status(200).json(updateDataJson);
         break;
+      case 'DELETE':
+        const deleteData = await fetch(`${baseUrl}/deleteOne`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Request-Headers': '*',
+            jwtTokenString: accessToken,
+          },
+          body: JSON.stringify({
+            dataSource: process.env.MONGODB_DATA_SOURCE,
+            database: 'social_butterfly',
+            collection: 'users',
+            filter: {
+              _id: { $oid: req.body._id },
+              'activity.id': req.body.activity.Id,
+            },
+            update: { $pull: { activity: { id: req.body.activityId } } },
+          }),
+        });
+        const deleteDataJson = await deleteData.json();
+        res.status(200).json(deleteDataJson);
+        break;
       default: //Method Not Allowed
         res.status(405).end();
         break;
