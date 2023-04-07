@@ -18,13 +18,29 @@ const BabyDailies = ({ users, userLoading }) => {
     userEvents?.length > 1 ? userEvents?.flat(200) : userEvents;
   console.log(displayEvents);
 
-  const handleEventClick = (clickInfo) => {
+  const handleEventClick = async (clickInfo) => {
+    const activityId = +clickInfo.event.id;
+    console.log(typeof activityId);
+
     if (
       confirm(
         `Are you sure you want to delete the event '${clickInfo.event.title}'`
       )
     ) {
-      console.log(clickInfo.event.id);
+      // fetch delete
+
+      const response = await fetch(`/api/user`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          _id: users._id,
+          activityId,
+        }),
+      });
+      const reponseJson = await response.json();
+      console.log(reponseJson);
     }
   };
 
@@ -54,6 +70,9 @@ const BabyDailies = ({ users, userLoading }) => {
           weekends={true}
           eventClick={handleEventClick}
         />
+        <div className="">
+          <p>* Click on an event to delete it.</p>
+        </div>
       </div>
     </>
   );

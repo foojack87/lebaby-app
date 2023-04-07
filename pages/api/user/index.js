@@ -92,7 +92,7 @@ export default withApiAuthRequired(async function handler(req, res) {
         res.status(200).json(updateDataJson);
         break;
       case 'DELETE':
-        const deleteData = await fetch(`${baseUrl}/deleteOne`, {
+        const deleteData = await fetch(`${baseUrl}/updateOne`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ export default withApiAuthRequired(async function handler(req, res) {
             collection: 'users',
             filter: {
               _id: { $oid: req.body._id },
-              'activity.id': req.body.activity.Id,
+              'activity.id': req.body.activityId,
             },
             update: { $pull: { activity: { id: req.body.activityId } } },
           }),

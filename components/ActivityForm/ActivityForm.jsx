@@ -23,10 +23,6 @@ const ActivityForm = ({ users, events }) => {
     setEnd(moment(date).toDate());
   };
 
-  // useEffect(() => {
-  //   setEvent(events);
-  // }, [events]);
-
   console.log(event);
 
   const onSubmitActivity = async (e) => {
@@ -37,11 +33,6 @@ const ActivityForm = ({ users, events }) => {
     setEvent(newEvent);
 
     console.log(event);
-
-    // const newEvents =
-    //   users.activity === undefined
-    //     ? { title, start, end, id: Date.now() }
-    //     : [users.activity, { title, start, end, id: Date.now() }];
 
     const response = await fetch('/api/user', {
       method: 'PUT',
