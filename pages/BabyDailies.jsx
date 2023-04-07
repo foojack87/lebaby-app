@@ -1,16 +1,14 @@
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
-import { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/router';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import moment from 'moment';
 import ActivityForm from '@/components/ActivityForm/ActivityForm';
 
 const BabyDailies = ({ users, userLoading }) => {
+  const router = useRouter();
   if (userLoading) return <div>Loading...</div>;
-
-  // fix this.
 
   const userEvents = users.activity === undefined ? '' : users.activity;
   console.log(userEvents);
@@ -41,6 +39,8 @@ const BabyDailies = ({ users, userLoading }) => {
       });
       const reponseJson = await response.json();
       console.log(reponseJson);
+
+      router.reload();
     }
   };
 

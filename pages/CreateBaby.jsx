@@ -1,5 +1,4 @@
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
-import useUserData from '@/utils/useUserData';
 import BabyForm from '@/components/BabyForm/BabyForm';
 
 const CreateBaby = ({ users, userLoading }) => {

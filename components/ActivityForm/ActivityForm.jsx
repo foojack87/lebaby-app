@@ -1,9 +1,10 @@
 import Datetime from 'react-datetime';
 import moment from 'moment';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 import 'react-datetime/css/react-datetime.css';
 
-const ActivityForm = ({ users, events }) => {
+const ActivityForm = ({ users, events, userLoading }) => {
   const [title, setTitle] = useState('');
   const [activityType, setActivityType] = useState('');
   const [start, setStart] = useState(new Date());
@@ -11,8 +12,9 @@ const ActivityForm = ({ users, events }) => {
   const [event, setEvent] = useState(events);
   const [inputDisabled, setInputDisabled] = useState(false);
 
-  // get existing events through props.
-  // pass the existing events + new event through PUT
+  const router = useRouter();
+
+  if (userLoading) return <div>Loading...</div>;
 
   const titleChangeHandler = (e) => {
     setTitle(e.target.value);
@@ -54,6 +56,11 @@ const ActivityForm = ({ users, events }) => {
     console.log(activityType);
   };
 
+  const changeBreastPump = (props) => {
+    setActivityType('breastPump');
+    setTitle('');
+    console.log(activityType);
+  };
   const bottleFeed = (
     <div className="flex flex-col">
       <label>Bottle Fed Amount</label>
@@ -87,6 +94,7 @@ const ActivityForm = ({ users, events }) => {
       <input placeholder="Nap" type="text" id="title" value={title} disabled />
     </div>
   );
+
   const poop = (
     <div className="flex flex-col">
       <label>Activity Type</label>
@@ -99,10 +107,25 @@ const ActivityForm = ({ users, events }) => {
       />
     </div>
   );
+
   const pee = (
     <div className="flex flex-col">
       <label>Activity Type</label>
       <input placeholder="Peed" type="text" id="title" value={title} disabled />
+    </div>
+  );
+
+  const breastPump = (
+    <div className="flex flex-col">
+      <label>Pumped Amount</label>
+      <input
+        required
+        placeholder="ie. 150mL"
+        type="number"
+        id="title"
+        value={title}
+        onChange={titleChangeHandler}
+      />
     </div>
   );
 
@@ -113,12 +136,26 @@ const ActivityForm = ({ users, events }) => {
 
     let newEvent = '';
 
-    activityType === 'bottleFeed'
-      ? (newEvent = [
-          ...event,
-          { title: `Bottle fed - ${title}ml`, start, end, id: Date.now() },
-        ])
-      : (newEvent = [...event, { title, start, end, id: Date.now() }]);
+    if (activityType === 'bottleFeed') {
+      newEvent = [
+        ...event,
+        { title: `Bottle fed - ${title}ml`, start, end, id: Date.now() },
+      ];
+    } else if (activityType === 'breastPump') {
+      newEvent = [
+        ...event,
+        { title: `Pumped - ${title}ml`, start, end, id: Date.now() },
+      ];
+    } else {
+      newEvent = [...event, { title, start, end, id: Date.now() }];
+    }
+
+    // activityType === 'bottleFeed'
+    //   ? (newEvent = [
+    //       ...event,
+    //       { title: `Bottle fed - ${title}ml`, start, end, id: Date.now() },
+    //     ])
+    //   : (newEvent = [...event, { title, start, end, id: Date.now() }]);
 
     setEvent(newEvent);
 
@@ -139,16 +176,17 @@ const ActivityForm = ({ users, events }) => {
     console.log(responseJson);
 
     setInputDisabled(false);
+    router.reload();
   };
 
   return (
     <div className="flex flex-col lg:flex-row rounded-xl w-[22rem] h-[35rem] items-center justify-center mx-auto shadow-lg relative">
       <h1 className="absolute left-[center] top-[10%] bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 text-xl font-bold border-b-2 border-violet-500">
-        What did {users.baby.firstName} just do?
+        Record An Activity
       </h1>
-      <div className="flex flex-col gap-8 mr-6">
+      <div className="flex flex-col gap-6 mr-6">
         <button
-          className={`shadow-lg rounded-xl py-0.5 px-2 ${
+          className={`shadow-lg rounded py-0.5 px-2 ${
             activityType === 'breastFeed'
               ? 'bg-purple-500 text-white'
               : 'bg-white text-gray-800'
@@ -158,7 +196,7 @@ const ActivityForm = ({ users, events }) => {
           Breast Feed
         </button>
         <button
-          className={`shadow-lg rounded-xl py-0.5 px-2 ${
+          className={`shadow-lg rounded py-0.5 px-2 ${
             activityType === 'bottleFeed'
               ? 'bg-purple-500 text-white'
               : 'bg-white text-gray-800'
@@ -168,7 +206,7 @@ const ActivityForm = ({ users, events }) => {
           Bottle Feed
         </button>
         <button
-          className={`shadow-lg rounded-xl py-0.5 px-2 ${
+          className={`shadow-lg rounded py-0.5 px-2 ${
             activityType === 'poop'
               ? 'bg-purple-500 text-white'
               : 'bg-white text-gray-800'
@@ -178,7 +216,7 @@ const ActivityForm = ({ users, events }) => {
           Poop
         </button>
         <button
-          className={`shadow-lg rounded-xl py-0.5 px-2 ${
+          className={`shadow-lg rounded py-0.5 px-2 ${
             activityType === 'pee'
               ? 'bg-purple-500 text-white'
               : 'bg-white text-gray-800'
@@ -188,7 +226,7 @@ const ActivityForm = ({ users, events }) => {
           Pee
         </button>
         <button
-          className={`shadow-lg rounded-xl py-0.5 px-2 ${
+          className={`shadow-lg rounded py-0.5 px-2 ${
             activityType === 'nap'
               ? 'bg-purple-500 text-white'
               : 'bg-white text-gray-800'
@@ -196,6 +234,16 @@ const ActivityForm = ({ users, events }) => {
           onClick={changeNap}
         >
           Nap
+        </button>
+        <button
+          className={`shadow-lg rounded py-0.5 px-2 ${
+            activityType === 'breastPump'
+              ? 'bg-purple-500 text-white'
+              : 'bg-white text-gray-800'
+          }`}
+          onClick={changeBreastPump}
+        >
+          Breast Pump
         </button>
       </div>
       <form
@@ -207,6 +255,7 @@ const ActivityForm = ({ users, events }) => {
         {activityType === 'poop' && poop}
         {activityType === 'pee' && pee}
         {activityType === 'nap' && nap}
+        {activityType === 'breastPump' && breastPump}
         <div>
           <label>Started</label>
           <Datetime value={start} onChange={startChangeHandler} />
@@ -216,7 +265,7 @@ const ActivityForm = ({ users, events }) => {
           <Datetime value={end} onChange={endChangeHandler} />
         </div>
         <button
-          className="shadow-lg rounded-xl border bg-purple-500 text-center text-white px-6 py-3 absolute bottom-[10%] left-[33%]"
+          className="shadow-lg rounded-xl border bg-purple-500 text-center text-white px-6 py-3 absolute bottom-[8%] left-[33%]"
           disabled={inputDisabled}
         >
           Add Activity

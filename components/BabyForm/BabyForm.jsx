@@ -1,10 +1,7 @@
 import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/router';
-import useUserData from '@/utils/useUserData';
 import { useState } from 'react';
 
 const BabyForm = ({ users }) => {
-  const router = useRouter();
   console.log(users._id);
   const { register, handleSubmit, setValue } = useForm({
     defaultValues: {
