@@ -216,7 +216,7 @@ const ActivityForm = ({ users, events }) => {
           <Datetime value={end} onChange={endChangeHandler} />
         </div>
         <button
-          className="shadow-lg rounded-xl py-0.5 px-1.5 border bg-purple-500 text-center text-white"
+          className="shadow-lg rounded-xl border bg-purple-500 text-center text-white px-6 py-3 absolute bottom-[10%] left-[33%]"
           disabled={inputDisabled}
         >
           Add Activity
