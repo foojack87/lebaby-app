@@ -6,7 +6,7 @@ import 'react-datetime/css/react-datetime.css';
 
 const ActivityForm = ({ users, events, userLoading }) => {
   const [title, setTitle] = useState('');
-  const [activityType, setActivityType] = useState('');
+  const [activityType, setActivityType] = useState('breastFeed');
   const [start, setStart] = useState(new Date());
   const [end, setEnd] = useState(new Date());
   const [event, setEvent] = useState(events);
@@ -28,7 +28,7 @@ const ActivityForm = ({ users, events, userLoading }) => {
 
   const changeBreastFeed = (props) => {
     setActivityType('breastFeed');
-    setTitle('Breast Fed');
+    setTitle('Breast fed');
     console.log(activityType);
   };
 
@@ -79,7 +79,7 @@ const ActivityForm = ({ users, events, userLoading }) => {
     <div className="flex flex-col">
       <label>Activity Type</label>
       <input
-        placeholder="Breast Fed"
+        placeholder="Breast fed"
         type="text"
         id="title"
         value={title}

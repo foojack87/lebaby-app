@@ -32,6 +32,54 @@ const BabyActivity = ({ users, userLoading }) => {
     totalPumpedMl += pumpMl;
   }
 
+  // logic for bottle fed data
+
+  const bottleToday = data.filter(
+    (item) =>
+      item.title.includes('Bottle') &&
+      new Date(item.start).toDateString() === today.toDateString()
+  );
+
+  let totalBottleFedMl = 0;
+  for (let i = 0; i < bottleToday.length; i++) {
+    const bottle = bottleToday[i];
+    const bottleMl = parseInt(bottle.title.match(/\d+/)); // Extracts the number from the title
+    totalBottleFedMl += bottleMl;
+  }
+
+  console.log(totalBottleFedMl);
+  console.log(bottleToday);
+
+  // logic for total times fed
+
+  const fed = data.filter(
+    (item) =>
+      item.title.includes('fed') &&
+      new Date(item.start).toDateString() === today.toDateString()
+  );
+
+  console.log(fed);
+
+  // logic for total nap time today
+
+  const napsToday = data.filter(
+    (item) =>
+      item.title.includes('Nap') &&
+      new Date(item.start).toDateString() === today.toDateString()
+  );
+
+  console.log(napsToday);
+
+  let totalNapMinutes = 0;
+
+  napsToday.forEach((nap) => {
+    const napDurationMs = new Date(nap.end) - new Date(nap.start);
+    const napDurationMinutes = napDurationMs / 1000 / 60;
+    totalNapMinutes += napDurationMinutes;
+  });
+
+  console.log(totalNapMinutes);
+
   // filter the data array to get only the items with the "poop" title that occurred on the current date
   const poopsToday = data.filter(
     (item) =>
@@ -88,27 +136,43 @@ const BabyActivity = ({ users, userLoading }) => {
   return (
     <>
       <div className="lg:flex-row rounded-xl w-[22rem] h-[35rem] items-center justify-center mx-auto shadow-lg relative p-8">
-        <h1 className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 text-xl font-bold border-b-2 border-violet-500 text-center mb-8 uppercase">
+        <h1 className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 text-xl font-bold border-b-2 border-violet-500 text-center mb-12 uppercase">
           Totals for Today
         </h1>
-        <div className="flex flex-col gap-6 justify-between h-[75%]">
-          <p>Nap: </p>
-          <p>Feedings: </p>
-          <p>Bottle Fed:</p>
+        <div className="flex flex-col gap-6 justify-between h-[75%] ml-12">
           <p>
-            Number of poops:
+            Nap:
+            <span className="font-bold text-xl ml-4">
+              {totalNapMinutes} mins
+            </span>
+          </p>
+          <p>
+            Feedings:
+            <span className="font-bold text-xl ml-4">
+              {fed.length > 0 ? fed.length : 0}
+              {fed.length === 1 ? ' time' : ' times'}
+            </span>
+          </p>
+          <p>
+            Bottle Fed:
+            <span className="font-bold text-xl ml-4">{totalBottleFedMl}ml</span>
+          </p>
+          <p>
+            Pooped:
             <span className="font-bold text-xl ml-4">
               {poopsToday.length > 0 ? poopsToday.length : 0}
+              {poopsToday.length === 1 ? ' time' : ' times'}
             </span>
           </p>
           <p>
             Peed:
             <span className="font-bold text-xl ml-4">
               {peesToday.length > 0 ? peesToday.length : 0}
+              {peesToday.length === 1 ? ' time' : ' times'}
             </span>
           </p>
           <p>
-            Pumped:{' '}
+            Pumped:
             <span className="font-bold text-xl ml-4">{totalPumpedMl}ml</span>
           </p>
         </div>
