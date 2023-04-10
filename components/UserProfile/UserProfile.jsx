@@ -28,9 +28,6 @@ const UserProfile = ({ toggle }) => {
       </div>
       <div className={toggle ? 'opacity-0 delay-200' : ''}>
         <h3 className="md:text-xl text-sm">{user.nickname}</h3>
-        <span className="text-[0.75rem] opacity-0 md:opacity-60">
-          {user.email}
-        </span>
       </div>
     </div>
   );
