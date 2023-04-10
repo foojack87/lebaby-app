@@ -150,13 +150,6 @@ const ActivityForm = ({ users, events, userLoading }) => {
       newEvent = [...event, { title, start, end, id: Date.now() }];
     }
 
-    // activityType === 'bottleFeed'
-    //   ? (newEvent = [
-    //       ...event,
-    //       { title: `Bottle fed - ${title}ml`, start, end, id: Date.now() },
-    //     ])
-    //   : (newEvent = [...event, { title, start, end, id: Date.now() }]);
-
     setEvent(newEvent);
 
     console.log(event);

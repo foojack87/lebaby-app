@@ -14,13 +14,13 @@ export const datas = [
     id: 2,
     icon: <MdInsights />,
     text: 'Activity',
-    path: '/BabyActivity',
+    path: '/BabyDailies',
   },
   {
     id: 3,
     icon: <RiCouponLine />,
     text: 'Dailies',
-    path: '/BabyDailies',
+    path: '/BabyActivity',
   },
   {
     id: 4,
