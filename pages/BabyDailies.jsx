@@ -12,9 +12,9 @@ const BabyDailies = ({ users, userLoading }) => {
 
   const userEvents = users.activity === undefined ? '' : users.activity;
   console.log(userEvents);
-  const displayEvents =
-    userEvents?.length > 1 ? userEvents?.flat(200) : userEvents;
-  console.log(displayEvents);
+  // const displayEvents =
+  //   userEvents?.length > 1 ? userEvents?.flat(200) : userEvents;
+  // console.log(displayEvents);
 
   const handleEventClick = async (clickInfo) => {
     const activityId = +clickInfo.event.id;
@@ -53,9 +53,7 @@ const BabyDailies = ({ users, userLoading }) => {
       />
       <div className="w-[45%]">
         <FullCalendar
-          initialEvents={
-            users.activity === undefined ? userEvents : displayEvents
-          }
+          initialEvents={userEvents}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={{
             left: 'prev,next today',
