@@ -5,6 +5,28 @@ const BabyInfo = ({ users }) => {
   const { firstName, lastName, height, weight, head, gender, birthday } =
     users.baby;
 
+  // Logic for getting current age of baby
+  const birthDate = new Date(birthday);
+  const currentDate = new Date();
+  const ageInMilliseconds = currentDate - birthDate;
+  const ageInDays = ageInMilliseconds / (24 * 60 * 60 * 1000);
+  let age;
+
+  if (ageInDays < 7) {
+    // Convert to age in days
+    age = Math.floor(ageInDays) + ' days';
+  } else if (ageInDays < 30) {
+    // Convert to age in weeks
+    const ageInWeeks = Math.floor(ageInDays / 7);
+    age = ageInWeeks === 1 ? '1 week' : ageInWeeks + ' weeks';
+  } else {
+    // Convert to age in months
+    const ageInMonths = Math.floor(ageInDays / 30);
+    age = ageInMonths === 1 ? '1 month' : ageInMonths + ' months';
+  }
+
+  console.log('Current Age: ' + age);
+
   return (
     <div className="container w-[75%] bg-white rounded-xl mx-auto shadow-lg px-8 py-6 relative overflow-hidden">
       <div className="text-transparent bg-gradient-to-r from-pink-500 to-violet-500 h-[7rem] absolute w-full inset-0 " />
@@ -28,7 +50,7 @@ const BabyInfo = ({ users }) => {
           <div>Height: {height}cm</div>
           <div>Weight: {weight}g</div>
           <div>Head: {head}cm</div>
-          <div>Age: 1MO</div>
+          <div>Age: {age}</div>
         </div>
       </div>
       <div className="flex flex-col gap-4 mt-6">

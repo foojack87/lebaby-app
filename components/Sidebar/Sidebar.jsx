@@ -14,7 +14,7 @@ const Sidebar = (props) => {
     <div
       className={`${
         toggle ? 'w-[5.8rem]' : 'sm:w-[12rem] md:w-[14rem] w-[10rem]'
-      } sidebar-container `}
+      } sidebar-container place-self-start`}
     >
       <UserProfile toggle={toggle} />
       <SidebarData toggle={toggle} />
