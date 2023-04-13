@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -38,8 +39,20 @@ export const options = {
 };
 
 const GrowthChart = ({ users, userLoading }) => {
-  if (userLoading) return <div>loading...</div>;
+  const [measurement, setMeasurement] = useState('weight');
 
+  if (userLoading) return <div>loading...</div>;
+  if (!users.baby) return <div>Create a baby first!</div>;
+
+  const weightMeasurement = () => {
+    setMeasurement('weight');
+  };
+  const heightMeasurement = () => {
+    setMeasurement('height');
+  };
+  const headMeasurement = () => {
+    setMeasurement('head');
+  };
   const { firstName, lastName, height, weight, head, gender, birthday } =
     users.baby;
 
@@ -67,13 +80,60 @@ const GrowthChart = ({ users, userLoading }) => {
 
   return (
     <>
-      <div className="flex flex-col w-[65%] h-[50%]">
-        <WeightChart currentAge={age} gender={gender} />
-        <HeightChart currentAge={age} />
-        <HeadChart currentAge={age} />
+      <div className="flex flex-col rounded-xl w-[14rem] h-[16rem] items-center justify-center mx-auto shadow-lg ml-8">
+        <h1 className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 text-xl font-bold border-b-2 border-violet-500 mb-10">
+          Record Growth
+        </h1>
+        <div className="flex flex-col gap-6">
+          <button
+            className={`shadow-lg rounded py-0.5 px-2 ${
+              measurement === 'weight'
+                ? 'bg-purple-500 text-white'
+                : 'bg-white text-gray-800'
+            }`}
+            onClick={weightMeasurement}
+          >
+            Weight
+          </button>
+          <button
+            className={`shadow-lg rounded py-0.5 px-2 ${
+              measurement === 'height'
+                ? 'bg-purple-500 text-white'
+                : 'bg-white text-gray-800'
+            }`}
+            onClick={heightMeasurement}
+          >
+            Height
+          </button>
+          <button
+            className={`shadow-lg rounded py-0.5 px-2 ${
+              measurement === 'head'
+                ? 'bg-purple-500 text-white'
+                : 'bg-white text-gray-800'
+            }`}
+            onClick={headMeasurement}
+          >
+            Headspan
+          </button>
+        </div>
+      </div>
+      <div className="flex w-[65%] h-[50%]">
+        {measurement === 'weight' && (
+          <WeightChart
+            currentAge={age}
+            gender={gender}
+            users={users}
+            userLoading={userLoading}
+          />
+        )}
+        {measurement === 'height' && <HeightChart currentAge={age} />}
+
+        {measurement === 'head' && <HeadChart currentAge={age} />}
       </div>
     </>
   );
 };
 
 export default GrowthChart;
+
+export const getServerSideProps = withPageAuthRequired();
