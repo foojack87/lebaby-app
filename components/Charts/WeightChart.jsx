@@ -129,6 +129,17 @@ const WeightChart = ({ currentAge, gender, users, userLoading }) => {
             <p>*Growth percentile for reference only.</p>
             <p>*Click on a data point to delete the data.</p>
           </div>
+          <div>
+            <p className="underline">References</p>
+            <p>
+              LMS Parameters for Girls: Length-for-age. World Health
+              Organization 2006, Child Growth Standards.
+            </p>
+            <p>
+              LMS Parameters for Boys: Length-for-age. World Health Organization
+              2006, Child Growth Standards.
+            </p>
+          </div>
         </div>
       </div>
     </>

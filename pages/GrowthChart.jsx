@@ -126,9 +126,23 @@ const GrowthChart = ({ users, userLoading }) => {
             userLoading={userLoading}
           />
         )}
-        {measurement === 'height' && <HeightChart currentAge={age} />}
+        {measurement === 'height' && (
+          <HeightChart
+            currentAge={age}
+            gender={gender}
+            users={users}
+            userLoading={userLoading}
+          />
+        )}
 
-        {measurement === 'head' && <HeadChart currentAge={age} />}
+        {measurement === 'head' && (
+          <HeadChart
+            currentAge={age}
+            gender={gender}
+            users={users}
+            userLoading={userLoading}
+          />
+        )}
       </div>
     </>
   );

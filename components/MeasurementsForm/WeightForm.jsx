@@ -154,7 +154,6 @@ const WeightForm = ({
       },
       body: JSON.stringify({
         _id: users._id,
-        weightMeasurements: { newMeasurementData, newLabel },
         weightLabels: newLabel,
         weightData: newMeasurementData,
       }),

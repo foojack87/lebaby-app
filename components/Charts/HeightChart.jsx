@@ -8,8 +8,12 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
-import { useState } from 'react';
+import { Line, getElementAtEvent, getDatasetAtEvent } from 'react-chartjs-2';
+import { useRef } from 'react';
+import { useRouter } from 'next/router';
+import HeightForm from '../MeasurementsForm/HeightForm';
+
+// Chartjs related settings
 
 ChartJS.register(
   CategoryScale,
@@ -21,63 +25,120 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top',
-    },
-    title: {
-      display: true,
-      text: 'Growth Chart',
-    },
-  },
-};
+const HeightChart = ({ currentAge, gender, users, userLoading }) => {
+  const chartRef = useRef();
+  const router = useRouter();
 
-const HeightChart = () => {
-  const [data, setData] = useState([]);
-  const labels = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-  ];
+  if (userLoading) return <div>Loading...</div>;
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const weight = Number(event.target.weight.value);
-    const newData = { weight };
-    setData([...data, newData]);
+  const data = users.heightData;
+  const labels = users.heightLabels;
+
+  console.log(data, labels);
+
+  // Logic for deleting data entries when clicking on a data point on the chart
+  const onClick = async (event) => {
+    const { current: chart } = chartRef;
+    const element = getElementAtEvent(chart, event);
+
+    if (element.length) {
+      const { datasetIndex, index } = element[0];
+      const confirmDelete = window.confirm(`Confirm delete?`);
+      if (confirmDelete) {
+        console.log(data[index]);
+        const newData = data.filter((_, i) => i !== index);
+        const newLabels = labels.filter((_, i) => i !== index);
+        console.log(newData, newLabels);
+
+        const response = await fetch('/api/baby', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            _id: users._id,
+            heightData: newData,
+            heightLabels: newLabels,
+          }),
+        });
+
+        const responseJson = response.json();
+        console.log(responseJson);
+      }
+    }
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: false,
+        text: 'Growth Chart',
+      },
+      tooltip: {
+        callbacks: {
+          label: function (tooltipItem) {
+            let label = chartData.labels[tooltipItem.dataIndex];
+            let value =
+              chartData.datasets[tooltipItem.datasetIndex].data[
+                tooltipItem.datasetIndex
+              ];
+          },
+        },
+      },
+    },
   };
 
   const chartData = {
-    labels,
+    labels: labels?.map((datum) => datum.age),
     datasets: [
       {
-        label: 'Height',
-        data: data.map((datum) => datum.weight),
+        label: 'Height (cm)',
+        data: data?.map((datum) => datum.height),
         fill: false,
-        borderColor: 'red',
+        borderColor: 'green',
       },
     ],
   };
 
   return (
     <>
-      <div>
-        <h2>Height Chart</h2>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Height:
-            <input type="number" name="weight" />
-          </label>
-          <button type="submit">Add Data</button>
-        </form>
+      <div className="flex flex-col mx-auto items-center">
+        <HeightForm
+          currentAge={currentAge}
+          gender={gender}
+          users={users}
+          userLoading={userLoading}
+          heightData={data}
+          heightLabels={labels}
+        />
+        <div className="w-[600px]">
+          <Line
+            options={options}
+            data={chartData}
+            onClick={onClick}
+            ref={chartRef}
+          />
+          <div className="text-center mt-3">
+            <p>*Growth percentile for reference only.</p>
+            <p>*Click on a data point to delete the data.</p>
+          </div>
+          <div>
+            <p className="underline">References</p>
+            <p>
+              LMS Parameters for Girls: Length-for-age. World Health
+              Organization 2006, Child Growth Standards.
+            </p>
+            <p>
+              LMS Parameters for Boys: Length-for-age. World Health Organization
+              2006, Child Growth Standards.
+            </p>
+          </div>
+        </div>
       </div>
-      <Line options={options} data={chartData} />
     </>
   );
 };
