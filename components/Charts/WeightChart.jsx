@@ -132,11 +132,11 @@ const WeightChart = ({ currentAge, gender, users, userLoading }) => {
           <div>
             <p className="underline">References</p>
             <p>
-              LMS Parameters for Girls: Length-for-age. World Health
+              LMS Parameters for Girls: Weight-for-age. World Health
               Organization 2006, Child Growth Standards.
             </p>
             <p>
-              LMS Parameters for Boys: Length-for-age. World Health Organization
+              LMS Parameters for Boys: Weight-for-age. World Health Organization
               2006, Child Growth Standards.
             </p>
           </div>
