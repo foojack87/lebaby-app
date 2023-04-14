@@ -1,9 +1,7 @@
 import { useRouter } from 'next/router';
-import { useUser, useSetUser } from '@/context/UserContext';
 
 function AnchorLink({ children, href, className }) {
   const router = useRouter();
-  const user = useUser();
 
   const handleClick = (e) => {
     e.preventDefault();

@@ -11,6 +11,8 @@ const UserProfile = ({ toggle }) => {
 
   // refactor nested ternary operator
 
+  const username = user.baby?.firstName ? user.baby.firstName : user.nickname;
+
   return (
     <div
       className={`flex gap-3 items-center ${
@@ -27,7 +29,7 @@ const UserProfile = ({ toggle }) => {
         />
       </div>
       <div className={toggle ? 'opacity-0 delay-200' : ''}>
-        <h3 className="md:text-xl text-sm">{user.nickname}</h3>
+        <h3 className="md:text-xl text-sm">{username}</h3>
       </div>
     </div>
   );

@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
-import { UserProvider as AtlasUserProvider } from '../context/UserContext';
 import Layout from '@/components/Layout/Layout';
 import '@/styles/globals.css';
 import useUserData from '@/utils/useUserData';
@@ -19,16 +18,14 @@ export default function App(props) {
         />
       </Head>
       <UserProvider>
-        <AtlasUserProvider>
-          <Layout users={user} userLoading={userLoading} error={error}>
-            <Component
-              {...pageProps}
-              users={user}
-              userLoading={userLoading}
-              error={error}
-            />
-          </Layout>
-        </AtlasUserProvider>
+        <Layout users={user} userLoading={userLoading} error={error}>
+          <Component
+            {...pageProps}
+            users={user}
+            userLoading={userLoading}
+            error={error}
+          />
+        </Layout>
       </UserProvider>
     </>
   );
