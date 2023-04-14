@@ -113,7 +113,7 @@ const GrowthChart = ({ users, userLoading }) => {
             }`}
             onClick={headMeasurement}
           >
-            Headspan
+            Head Circumfrence
           </button>
         </div>
       </div>

@@ -65,6 +65,7 @@ const HeightChart = ({ currentAge, gender, users, userLoading }) => {
         const responseJson = response.json();
         console.log(responseJson);
       }
+      router.reload();
     }
   };
 
