@@ -165,7 +165,7 @@ const WeightForm = ({
     event.preventDefault();
 
     const weight = Number(event.target.weight.value);
-    const age = currentAge;
+    const age = Number(event.target.age.value) + ' month';
     const babyGender = gender;
     const newData = { weight };
 
@@ -218,10 +218,10 @@ const WeightForm = ({
           <label>
             Age:
             <input
-              type="text"
+              type="number"
+              placeholder="months"
               name="age"
-              disabled
-              value={currentAge}
+              required
               className="w-[6rem] ml-3 text-center"
             />
           </label>

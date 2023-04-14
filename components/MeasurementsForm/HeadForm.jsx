@@ -154,14 +154,7 @@ const gender = 'boy';
 const result = calculateHeadZScoreAndPercentile(ageMonths, headCm, gender);
 console.log(result);
 
-const HeadForm = ({
-  headData,
-  headLabels,
-  currentAge,
-  gender,
-  users,
-  userLoading,
-}) => {
+const HeadForm = ({ headData, headLabels, gender, users, userLoading }) => {
   const [data, setData] = useState(headData === undefined ? [] : headData);
   const [labels, setLabels] = useState(
     headLabels === undefined ? [] : headLabels
@@ -176,7 +169,7 @@ const HeadForm = ({
     event.preventDefault();
 
     const head = Number(event.target.head.value);
-    const age = currentAge;
+    const age = Number(event.target.age.value) + ' month';
     const babyGender = gender;
     const newData = { head };
 
@@ -231,10 +224,10 @@ const HeadForm = ({
           <label>
             Age:
             <input
-              type="text"
+              type="number"
+              placeholder="months"
               name="age"
-              disabled
-              value={currentAge}
+              required
               className="w-[6rem] ml-3 text-center"
             />
           </label>
