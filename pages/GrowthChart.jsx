@@ -15,6 +15,7 @@ import WeightChart from '@/components/Charts/WeightChart';
 import HeightChart from '@/components/Charts/HeightChart';
 import HeadChart from '@/components/Charts/HeadChart';
 import NoBaby from '@/components/NoBaby/NoBaby';
+import { ImSpinner3 } from 'react-icons/im';
 
 ChartJS.register(
   CategoryScale,
@@ -41,11 +42,10 @@ export const options = {
 
 const GrowthChart = ({ users, userLoading }) => {
   const [measurement, setMeasurement] = useState('weight');
-
   if (userLoading)
     return (
-      <div className="w-[100%] h-[100%] flex justify-center">
-        spinner here...
+      <div className="w-[100%] h-[100%] flex justify-center text-6xl text-pink-500">
+        <ImSpinner3 className="animate-spin" />
       </div>
     );
 

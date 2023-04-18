@@ -39,22 +39,9 @@ import { TbMoodBoy } from 'react-icons/tb';
 
 const BabyInfo = ({ users }) => {
   const [modalOpened, setModalOpened] = useState(false);
-  const [deleted, setDeleted] = useState(false);
-  const [inputDisabled, setInputDisabled] = useState(false);
 
   const { firstName, lastName, height, weight, head, gender, birthday } =
     users.baby;
-
-  const { register, handleSubmit, setValue } = useForm({
-    defaultValues: {
-      firstName,
-      lastName,
-      height,
-      weight,
-      head,
-      birthday,
-    },
-  });
 
   // Logic for getting current age of baby
   const birthDate = new Date(birthday);
@@ -186,6 +173,10 @@ const BabyInfo = ({ users }) => {
     setModalOpened(true);
   };
 
+  const closeModalHandler = (props) => {
+    setModalOpened(false);
+  };
+
   const genderIcon = gender === 'boy' ? <BsGenderMale /> : <BsGenderFemale />;
 
   return (
@@ -201,6 +192,7 @@ const BabyInfo = ({ users }) => {
             gender={gender}
             birthday={birthday}
             users={users}
+            closeModal={closeModalHandler}
           />
         </Modal>
       )}

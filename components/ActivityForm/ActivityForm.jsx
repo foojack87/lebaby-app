@@ -2,6 +2,7 @@ import Datetime from 'react-datetime';
 import moment from 'moment';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { ImSpinner3 } from 'react-icons/im';
 import 'react-datetime/css/react-datetime.css';
 
 const ActivityForm = ({ users, events, userLoading }) => {
@@ -15,6 +16,12 @@ const ActivityForm = ({ users, events, userLoading }) => {
   const router = useRouter();
 
   if (userLoading) return <div>Loading...</div>;
+
+  const spinner = inputDisabled && (
+    <div className="w-[100%] h-[100%] flex justify-center text-xl text-white">
+      <ImSpinner3 className="animate-spin" />
+    </div>
+  );
 
   const titleChangeHandler = (e) => {
     setTitle(e.target.value);
@@ -129,10 +136,9 @@ const ActivityForm = ({ users, events, userLoading }) => {
     </div>
   );
 
-  console.log(event);
-
   const onSubmitActivity = async (e) => {
     e.preventDefault();
+    setInputDisabled(true);
 
     let newEvent = '';
 
@@ -258,10 +264,10 @@ const ActivityForm = ({ users, events, userLoading }) => {
           <Datetime value={end} onChange={endChangeHandler} />
         </div>
         <button
-          className="shadow-lg rounded-xl border bg-purple-500 text-center text-white px-6 py-3 absolute bottom-[8%] left-[33%]"
+          className="shadow-lg w-[9rem] h-[3rem] rounded-xl border bg-purple-500 text-center text-white px-6 py-3 absolute bottom-[8%] left-[33%]"
           disabled={inputDisabled}
         >
-          Add Activity
+          {inputDisabled ? spinner : 'Add Activity'}
         </button>
       </form>
     </div>

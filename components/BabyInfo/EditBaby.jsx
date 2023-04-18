@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { ImSpinner3 } from 'react-icons/im';
 
 const EditBaby = ({
   users,
@@ -10,8 +11,8 @@ const EditBaby = ({
   height,
   gender,
   birthday,
+  closeModal,
 }) => {
-  const [modalOpened, setModalOpened] = useState(false);
   const [inputDisabled, setInputDisabled] = useState(false);
 
   const { register, handleSubmit, setValue } = useForm({
@@ -26,45 +27,15 @@ const EditBaby = ({
     },
   });
 
-  // Logic for getting current age of baby
-  const birthDate = new Date(birthday);
-  const currentDate = new Date();
-  const ageInMilliseconds = currentDate - birthDate;
-  const ageInDays = ageInMilliseconds / (24 * 60 * 60 * 1000);
-  let age;
+  // spinner for loading state
 
-  if (ageInDays < 7) {
-    // Convert to age in days
-    age = Math.floor(ageInDays) + ' days old';
-  } else if (ageInDays < 30) {
-    // Convert to age in weeks and days
-    const ageInWeeks = Math.floor(ageInDays / 7);
-    const ageInRemainingDays = Math.floor(ageInDays % 7);
-    age = ageInWeeks === 1 ? '1 week' : ageInWeeks + ' weeks';
-    if (ageInRemainingDays > 0) {
-      age += ' and ' + ageInRemainingDays + ' days old';
-    }
-  } else {
-    // Convert to age in months and days
-    const ageInMonths = Math.floor(ageInDays / 30);
-    const ageInRemainingDays = Math.floor(ageInDays % 30);
-    age = ageInMonths === 1 ? '1 month' : ageInMonths + ' months';
-    if (ageInRemainingDays > 0 && ageInRemainingDays !== 1) {
-      age += ' ' + ageInRemainingDays + ' days';
-    }
-  }
+  const spinner = inputDisabled && (
+    <div className="w-[100%] h-[100%] flex items-center justify-center text-xl text-white">
+      <ImSpinner3 className="animate-spin" />
+    </div>
+  );
 
-  console.log('Current Age: ' + age);
-
-  // Handler for editting baby info
-
-  const editBabyHandler = (props) => {
-    setModalOpened(true);
-  };
-
-  const closeModalHandler = (props) => {
-    setModalOpened(false);
-  };
+  // Handler for editing baby info
 
   const onSubmitEditBaby = async (data) => {
     setInputDisabled(true);
@@ -253,17 +224,16 @@ const EditBaby = ({
 
         <div className="flex gap-4 mt-8 items-center justify-center">
           <button
-            className="w-[6rem] border rounded bg-purple-500 py-2 text-center text-white"
-            onClick={closeModalHandler}
+            className="w-[6rem] h-[3rem] border rounded bg-purple-500 py-2 text-center text-white"
+            onClick={closeModal}
           >
             Close
           </button>
           <button
-            className="w-[6rem] border rounded bg-purple-500 py-2 text-center text-white"
-            onClick={editBabyHandler}
+            className="w-[6rem] h-[3rem] border rounded bg-purple-500 py-2 text-center text-white"
             disabled={inputDisabled}
           >
-            Edit
+            {inputDisabled ? spinner : 'Edit'}
           </button>
         </div>
       </form>

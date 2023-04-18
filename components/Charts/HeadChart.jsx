@@ -100,7 +100,7 @@ const HeadChart = ({ currentAge, gender, users, userLoading }) => {
         label: 'Head Circumfrence (cm)',
         data: data?.map((datum) => datum.head),
         fill: false,
-        borderColor: 'green',
+        borderColor: 'blue',
       },
     ],
   };

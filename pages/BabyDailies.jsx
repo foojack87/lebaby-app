@@ -6,13 +6,14 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import ActivityForm from '@/components/ActivityForm/ActivityForm';
 import NoBaby from '@/components/NoBaby/NoBaby';
+import { ImSpinner3 } from 'react-icons/im';
 
 const BabyDailies = ({ users, userLoading }) => {
   const router = useRouter();
   if (userLoading)
     return (
-      <div className="w-[100%] h-[100%] flex justify-center">
-        spinner here...
+      <div className="w-[100%] h-[100%] flex justify-center text-6xl text-pink-500">
+        <ImSpinner3 className="animate-spin" />
       </div>
     );
 

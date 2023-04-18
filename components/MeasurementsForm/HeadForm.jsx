@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { ImSpinner3 } from 'react-icons/im';
 
 // Logic for calculating percentile of babies weight
 const zScoreTable = [
@@ -161,15 +162,25 @@ const HeadForm = ({ headData, headLabels, gender, users, userLoading }) => {
   );
   const [inputDisabled, setInputDisabled] = useState(false);
 
+  // spinner
+
+  const spinner = inputDisabled && (
+    <div className="w-[100%] h-[100%] flex justify-center items-center text-xl text-white">
+      <ImSpinner3 className="animate-spin" />
+    </div>
+  );
   const router = useRouter();
   if (userLoading) return <div>Loading...</div>;
 
   // Logic for submitting weight data of the baby
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setInputDisabled(true);
+
+    console.log(event.target.age);
 
     const head = Number(event.target.head.value);
-    const age = Number(event.target.age.value) + ' month';
+    const age = Number(event.target.age.value) + 'month';
     const babyGender = gender;
     const newData = { head };
 
@@ -229,13 +240,14 @@ const HeadForm = ({ headData, headLabels, gender, users, userLoading }) => {
               name="age"
               required
               className="w-[6rem] ml-3 text-center"
+              min="0"
             />
           </label>
           <label>
             Gender:
             <input
               type="text"
-              name="age"
+              name="gender"
               disabled
               value={gender}
               className="w-[6rem] ml-3 text-center"
@@ -245,10 +257,10 @@ const HeadForm = ({ headData, headLabels, gender, users, userLoading }) => {
         <div className="place-self-center">
           <button
             type="submit"
-            className="shadow-lg rounded-xl border bg-purple-500 text-center text-white px-2 py-1"
+            className="shadow-lg rounded-xl border w-[6rem] h-[2.5rem] bg-purple-500 text-center text-white px-2 py-1"
             disabled={inputDisabled}
           >
-            Add Data
+            {inputDisabled ? spinner : 'Add Data'}
           </button>
         </div>
       </form>
