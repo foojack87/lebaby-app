@@ -1,29 +1,32 @@
 import AnchorLink from '@/components/AnchorLink/AnchorLink';
 import BabyInfo from '@/components/BabyInfo/BabyInfo';
+import NoBaby from '@/components/NoBaby/NoBaby';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
+import { ImSpinner3 } from 'react-icons/im';
 
 const BabyProfile = ({ users, userLoading }) => {
   console.log(users);
 
-  if (userLoading) return <div>loading...</div>;
+  // check if still fetching user data
+  if (userLoading)
+    return (
+      <div className="w-[100%] h-[100%] flex justify-center text-6xl text-pink-500">
+        <ImSpinner3 className="animate-spin" />
+      </div>
+    );
 
-  // Refactor nested ternary operator
+  // check to see if they created a baby yet
+  if (!users.baby)
+    return (
+      <div className="w-[54rem] h-full ml-4">
+        <NoBaby />
+      </div>
+    );
 
   return (
     <>
       <section className="w-[54rem] h-full ml-4">
-        {users && users.baby ? (
-          <BabyInfo users={users} />
-        ) : (
-          <div className="flex flex-col gap-4 items-center justify-center">
-            <p className="sm:text-[1.2rem] md:text-[1.4rem] text-[0.8rem] text-center">
-              No baby found, start now by pressing the button below!
-            </p>
-            <AnchorLink href="/CreateBaby" className="px-4 py-2">
-              Create Profile
-            </AnchorLink>
-          </div>
-        )}
+        <BabyInfo users={users} />
       </section>
     </>
   );

@@ -1,12 +1,18 @@
 import profilepic from '../../public/55.jpg';
 import useUserData from '@/utils/useUserData';
 import Image from 'next/image';
+import { ImSpinner3 } from 'react-icons/im';
 
 const UserProfile = ({ toggle }) => {
   const { user, error, userLoading } = useUserData();
   console.log(user);
 
-  if (userLoading) return <div>loading...</div>;
+  if (userLoading)
+    return (
+      <div className="w-[100%] h-[100%] flex justify-center text-4xl text-pink-500">
+        <ImSpinner3 className="animate-spin" />
+      </div>
+    );
   if (error) return <div>error</div>;
 
   // refactor nested ternary operator

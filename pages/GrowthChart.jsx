@@ -14,6 +14,7 @@ import { Line } from 'react-chartjs-2';
 import WeightChart from '@/components/Charts/WeightChart';
 import HeightChart from '@/components/Charts/HeightChart';
 import HeadChart from '@/components/Charts/HeadChart';
+import NoBaby from '@/components/NoBaby/NoBaby';
 
 ChartJS.register(
   CategoryScale,
@@ -41,8 +42,19 @@ export const options = {
 const GrowthChart = ({ users, userLoading }) => {
   const [measurement, setMeasurement] = useState('weight');
 
-  if (userLoading) return <div>loading...</div>;
-  if (!users.baby) return <div>Create a baby first!</div>;
+  if (userLoading)
+    return (
+      <div className="w-[100%] h-[100%] flex justify-center">
+        spinner here...
+      </div>
+    );
+
+  if (!users.baby)
+    return (
+      <div className="w-[54rem] h-full ml-4">
+        <NoBaby />
+      </div>
+    );
 
   const weightMeasurement = () => {
     setMeasurement('weight');

@@ -3,11 +3,14 @@ import { BiChevronLeft } from 'react-icons/bi';
 import SidebarData from './SidebarData';
 import UserProfile from '../UserProfile/UserProfile';
 
-const Sidebar = (props) => {
+const Sidebar = ({ users }) => {
   const [toggle, setToggle] = useState(true);
+  const { baby } = !users?.baby ? '' : users.baby;
 
   const toggleHandler = () => {
     setToggle(!toggle);
+    console.log(users);
+    console.log(baby);
   };
 
   return (
@@ -23,7 +26,7 @@ const Sidebar = (props) => {
         onClick={toggleHandler}
       >
         <BiChevronLeft
-          className={`${
+          className={`text-pink-500 ${
             toggle ? 'rotate-180' : ''
           } text-3xl transition-all duration-300`}
         />

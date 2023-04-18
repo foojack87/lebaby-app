@@ -5,10 +5,23 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import ActivityForm from '@/components/ActivityForm/ActivityForm';
+import NoBaby from '@/components/NoBaby/NoBaby';
 
 const BabyDailies = ({ users, userLoading }) => {
   const router = useRouter();
-  if (userLoading) return <div>Loading...</div>;
+  if (userLoading)
+    return (
+      <div className="w-[100%] h-[100%] flex justify-center">
+        spinner here...
+      </div>
+    );
+
+  if (!users.baby)
+    return (
+      <div className="w-[54rem] h-full ml-4">
+        <NoBaby />
+      </div>
+    );
 
   const userEvents = users.activity === undefined ? '' : users.activity;
   console.log(userEvents);

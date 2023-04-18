@@ -4,9 +4,22 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import DailyTotals from '@/components/DailyTotals/DailyTotals';
+import NoBaby from '@/components/NoBaby/NoBaby';
 
 const BabyActivity = ({ users, userLoading }) => {
-  if (userLoading) return <div>Loading...</div>;
+  if (userLoading)
+    return (
+      <div className="w-[100%] h-[100%] flex justify-center">
+        spinner here...
+      </div>
+    );
+
+  if (!users.baby)
+    return (
+      <div className="w-[54rem] h-full ml-4">
+        <NoBaby />
+      </div>
+    );
 
   // to get activity data to be displayable in the calendar
   const userEvents = users.activity === undefined ? '' : users.activity;

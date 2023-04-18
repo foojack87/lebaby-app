@@ -1,8 +1,41 @@
 import profilepic from '../../public/55.jpg';
 import Image from 'next/image';
 import Modal from '../Modal/Modal';
+import EditBaby from './EditBaby';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import { BsGenderFemale, BsGenderMale } from 'react-icons/bs';
+import {
+  GiPisces,
+  GiAquarius,
+  GiAries,
+  GiTaurus,
+  GiCancer,
+  GiGemini,
+  GiCapricorn,
+  GiScorpio,
+  GiLibra,
+  GiSagittarius,
+  GiVirgo,
+  GiLeo,
+  GiMonkey,
+  GiRooster,
+  GiSittingDog,
+  GiPig,
+  GiRat,
+  GiBull,
+  GiTiger,
+  GiRabbit,
+  GiSeaDragon,
+  GiSnake,
+  GiHorseHead,
+  GiSheep,
+  GiWeightScale,
+} from 'react-icons/gi';
+import { FaBirthdayCake } from 'react-icons/fa';
+import { TfiRuler } from 'react-icons/tfi';
+import { RxRulerHorizontal } from 'react-icons/rx';
+import { TbMoodBoy } from 'react-icons/tb';
 
 const BabyInfo = ({ users }) => {
   const [modalOpened, setModalOpened] = useState(false);
@@ -25,6 +58,9 @@ const BabyInfo = ({ users }) => {
 
   // Logic for getting current age of baby
   const birthDate = new Date(birthday);
+  const year = birthDate.getFullYear();
+  const month = birthDate.getMonth() + 1;
+  const day = birthDate.getDate();
   const currentDate = new Date();
   const ageInMilliseconds = currentDate - birthDate;
   const ageInDays = ageInMilliseconds / (24 * 60 * 60 * 1000);
@@ -51,251 +87,163 @@ const BabyInfo = ({ users }) => {
     }
   }
 
-  console.log('Current Age: ' + age);
+  // logic for finding zodiac sign
 
-  // Handler for editting baby info
+  const chineseZodiacs = [
+    { name: 'Monkey', icon: <GiMonkey /> },
+    { name: 'Rooster', icon: <GiRooster /> },
+    { name: 'Dog', icon: <GiSittingDog /> },
+    { name: 'Pig', icon: <GiPig /> },
+    { name: 'Rat', icon: <GiRat /> },
+    { name: 'Ox', icon: <GiBull /> },
+    { name: 'Tiger', icon: <GiTiger /> },
+    { name: 'Rabbit', icon: <GiRabbit /> },
+    { name: 'Dragon', icon: <GiSeaDragon /> },
+    { name: 'Snake', icon: <GiSnake /> },
+    { name: 'Horse', icon: <GiHorseHead /> },
+    { name: 'Sheep', icon: <GiSheep /> },
+  ];
+
+  const chineseZodiacIndex = (year - 1900) % 12;
+  const chineseZodiac = chineseZodiacs[chineseZodiacIndex];
+
+  console.log(`Your Chinese zodiac sign is ${chineseZodiac.name}`);
+
+  // logic for finding babies horoscope
+
+  const horoscopes = [
+    {
+      name: 'Aquarius',
+      icon: <GiAquarius />,
+      range: { startMonth: 1, startDay: 20, endMonth: 2, endDay: 18 },
+    },
+    {
+      name: 'Pisces',
+      icon: <GiPisces />,
+      range: { startMonth: 2, startDay: 19, endMonth: 3, endDay: 20 },
+    },
+    {
+      name: 'Aries',
+      icon: <GiAries />,
+      range: { startMonth: 3, startDay: 21, endMonth: 4, endDay: 19 },
+    },
+    {
+      name: 'Taurus',
+      icon: <GiTaurus />,
+      range: { startMonth: 4, startDay: 20, endMonth: 5, endDay: 20 },
+    },
+    {
+      name: 'Gemini',
+      icon: <GiGemini />,
+      range: { startMonth: 5, startDay: 21, endMonth: 6, endDay: 20 },
+    },
+    {
+      name: 'Cancer',
+      icon: <GiCancer />,
+      range: { startMonth: 6, startDay: 21, endMonth: 7, endDay: 22 },
+    },
+    {
+      name: 'Leo',
+      icon: <GiLeo />,
+      range: { startMonth: 7, startDay: 23, endMonth: 8, endDay: 22 },
+    },
+    {
+      name: 'Virgo',
+      icon: <GiVirgo />,
+      range: { startMonth: 8, startDay: 23, endMonth: 9, endDay: 22 },
+    },
+    {
+      name: 'Libra',
+      icon: <GiLibra />,
+      range: { startMonth: 9, startDay: 23, endMonth: 10, endDay: 22 },
+    },
+    {
+      name: 'Scorpio',
+      icon: <GiScorpio />,
+      range: { startMonth: 10, startDay: 23, endMonth: 11, endDay: 21 },
+    },
+    {
+      name: 'Sagittarius',
+      icon: <GiSagittarius />,
+      range: { startMonth: 11, startDay: 22, endMonth: 12, endDay: 21 },
+    },
+    {
+      name: 'Capricorn',
+      icon: <GiCapricorn />,
+      range: { startMonth: 12, startDay: 22, endMonth: 1, endDay: 19 },
+    },
+  ];
+
+  const horoscope = horoscopes.find(
+    (sign) =>
+      (month === sign.range.startMonth && day >= sign.range.startDay) ||
+      (month === sign.range.endMonth && day <= sign.range.endDay)
+  );
+
+  console.log(`Your horoscope is ${horoscope.name}`);
 
   const editBabyHandler = (props) => {
     setModalOpened(true);
   };
 
-  const closeModalHandler = (props) => {
-    setModalOpened(false);
-  };
-
-  const onSubmitEditBaby = async (data) => {
-    setInputDisabled(true);
-    const baby = {
-      _id: users._id,
-      postedAt: Date.now(),
-      baby: data,
-    };
-
-    const response = await fetch('/api/user', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(baby),
-    });
-
-    const responseJson = await response.json();
-    console.log(responseJson);
-
-    setInputDisabled(false);
-    window.location.href = '/BabyProfile';
-  };
+  const genderIcon = gender === 'boy' ? <BsGenderMale /> : <BsGenderFemale />;
 
   return (
     <>
       {modalOpened && (
         <Modal>
-          <div>
-            <form
-              className="border shadow rounded px-8 pt-6 pb-8"
-              onSubmit={handleSubmit(onSubmitEditBaby)}
-            >
-              <div className="flex justify-between">
-                <div>
-                  <div className="mb-4">
-                    <label
-                      className="block text-gray-700 font-bold mb-2"
-                      htmlFor="firstName"
-                    >
-                      First Name
-                    </label>
-                    <input
-                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline "
-                      type="text"
-                      id="firstName"
-                      name="firstName"
-                      {...register('firstName', {
-                        required: true,
-                        maxLength: 20,
-                      })}
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <label
-                      className="block text-gray-700 font-bold mb-2"
-                      htmlFor="lastName"
-                    >
-                      Last Name
-                    </label>
-                    <input
-                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline "
-                      type="text"
-                      id="lastName"
-                      name="lastName"
-                      {...register('lastName', {
-                        required: true,
-                        maxLength: 20,
-                        pattern: /^[A-Za-z]+$/i,
-                      })}
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <label
-                      className="block text-gray-700 font-bold mb-2"
-                      htmlFor="birthday"
-                    >
-                      Birthday
-                    </label>
-                    <input
-                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline "
-                      type="date"
-                      id="birthday"
-                      name="birthday"
-                      {...register('birthday')}
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <div className="mb-4">
-                    <label
-                      className="block text-gray-700 font-bold mb-2"
-                      htmlFor="height"
-                    >
-                      Height
-                    </label>
-                    <input
-                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline "
-                      type="number"
-                      id="height"
-                      name="height"
-                      {...register('height', {
-                        required: true,
-                        maxLength: 2,
-                        minLength: 2,
-                      })}
-                    />
-                  </div>
-
-                  <div className="mb-4">
-                    <label
-                      className="block text-gray-700 font-bold mb-2"
-                      htmlFor="weight"
-                    >
-                      Weight
-                    </label>
-                    <input
-                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline "
-                      type="number"
-                      id="weight"
-                      name="weight"
-                      {...register('weight', {
-                        required: true,
-                        maxLength: 3,
-                        minLength: 4,
-                      })}
-                    />
-                  </div>
-
-                  <div className="mb-4">
-                    <label
-                      className="block text-gray-700 font-bold mb-2"
-                      htmlFor="head"
-                    >
-                      Head
-                    </label>
-                    <input
-                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline "
-                      type="number"
-                      id="head"
-                      name="head"
-                      {...register('head', {
-                        required: true,
-                        maxLength: 2,
-                        minLength: 2,
-                      })}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="flex mt-5 border rounded-full overflow-hidden select-none w-[70%] mx-auto">
-                <div className=" px-2 py-1 bg-purple-500 text-white text-sm font-semibold mr-3">
-                  Gender
-                </div>
-                <div className="flex mx-auto w-full justify-between">
-                  <label className="flex radio cursor-pointer place-items-center">
-                    <input
-                      className="transform scale-95"
-                      type="radio"
-                      value="boy"
-                      id="field-boy"
-                      {...register('gender')}
-                    />
-                    <div className="pl-1 pr-2 text-[0.8rem]">Boy</div>
-                  </label>
-                  <label className="flex radio cursor-pointer place-items-center">
-                    <input
-                      className="transform scale-95"
-                      type="radio"
-                      value="girl"
-                      id="field-girl"
-                      {...register('gender')}
-                    />
-                    <div className="pl-1 pr-2 text-[0.8rem]">Girl</div>
-                  </label>
-                  <label className="flex radio cursor-pointer place-items-center">
-                    <input
-                      className="transform scale-95"
-                      type="radio"
-                      value="neutral"
-                      id="field-neutral"
-                      {...register('gender')}
-                    />
-                    <div className="pl-1 pr-4 text-[0.8rem]">Neutral</div>
-                  </label>
-                </div>
-              </div>
-
-              <div className="flex gap-4 mt-8 items-center justify-center">
-                <button
-                  className="w-[6rem] border rounded bg-purple-500 py-2 text-center text-white"
-                  onClick={closeModalHandler}
-                >
-                  Close
-                </button>
-                <button
-                  className="w-[6rem] border rounded bg-purple-500 py-2 text-center text-white"
-                  onClick={editBabyHandler}
-                  disabled={inputDisabled}
-                >
-                  Edit
-                </button>
-              </div>
-            </form>
-          </div>
+          <EditBaby
+            firstName={firstName}
+            lastName={lastName}
+            weight={weight}
+            height={height}
+            head={head}
+            gender={gender}
+            birthday={birthday}
+            users={users}
+          />
         </Modal>
       )}
-      <div className="container w-[75%] bg-white rounded-xl mx-auto shadow-lg px-8 py-6 relative overflow-hidden">
-        <div className="bg-gradient-to-r from-pink-500 to-violet-500 h-[7rem] absolute w-full inset-0 ">
-          <p className="absolute top-[3rem] right-[2rem] text-xl text-white border-b-2 border-white">
-            I am {age} old today
-          </p>
+      <div className="container w-[55%] bg-white rounded-xl mx-auto shadow-lg px-8 py-6 relative overflow-hidden">
+        <div className="bg-gradient-to-r from-pink-500 to-violet-500 h-[8rem] absolute w-full inset-0 ">
+          <div className="absolute top-[2rem] right-[4rem] text-white flex items-center gap-2">
+            <span className="text-2xl">Horoscope:</span>
+            <span className="text-4xl">{horoscope.icon}</span>
+          </div>
+          <div className="absolute top-[4.5rem] right-[4rem] text-white flex items-center gap-2">
+            <span className="text-2xl">Zodiac:</span>
+            <span className="text-4xl">{chineseZodiac.icon}</span>
+          </div>
         </div>
-        <div className="flex gap-10 pt-[8rem] relative">
+        <div className="flex items-center pt-[8rem] justify-between relative mr-6 ml">
           <div className="border-[6px] rounded-full absolute top-[1rem] overflow-hidden w-[10rem] h-[10rem] border-white">
             <Image src={profilepic} alt="profile pic" className="w-[10rem]" />
           </div>
-          <div className="text-center flex items-center mt-12">
-            <span className="mr-4 text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 font-bold">
+          <div className="flex items-center mt-12 ml-4 gap-2">
+            <span className="text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 font-bold">
               {firstName} {lastName}
             </span>
-            <span>{gender}</span>
+            <span className="text-2xl text-violet-500">{genderIcon}</span>
           </div>
           <div className="flex flex-col gap-2">
-            <div>Horoscope: Gemini</div>
-            <div>Zodiac Sign: Rabbit</div>
-            <div>Birth Date: {birthday}</div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <div>Height: {height}cm</div>
-            <div>Weight: {weight}g</div>
-            <div>Head: {head}cm</div>
-            <div>Age: {age}</div>
+            <div className="flex items-center gap-2">
+              <FaBirthdayCake className="text-xl text-violet-500" /> {birthday}
+            </div>
+
+            <div className="flex items-center gap-2">
+              <TfiRuler className="text-xl text-violet-500" /> {height}cm
+            </div>
+            <div className="flex items-center gap-2">
+              <GiWeightScale className="text-xl text-violet-500" /> {weight}g
+            </div>
+            <div className="flex items-center gap-2">
+              <RxRulerHorizontal className="text-xl text-violet-500" />
+              {head}cm
+            </div>
+            <div className="flex items-center gap-2">
+              <TbMoodBoy className="text-xl text-violet-500" />
+              {age}
+            </div>
           </div>
         </div>
         <div className="flex gap-4 mt-8 items-center justify-center">
