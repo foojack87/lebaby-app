@@ -111,9 +111,9 @@ export default withApiAuthRequired(async function handler(req, res) {
             collection: 'users',
             filter: {
               _id: { $oid: req.body._id },
-              'activity.id': req.body.activityId,
+              baby: req.body.baby,
             },
-            update: { $pull: { activity: { id: req.body.activityId } } },
+            update: { $pull: baby },
           }),
         });
         const deleteDataJson = await deleteData.json();

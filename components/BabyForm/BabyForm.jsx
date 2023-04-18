@@ -1,20 +1,21 @@
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
-const BabyForm = ({ users }) => {
-  console.log(users._id);
+const BabyForm = ({ users, userLoading }) => {
+  const router = useRouter();
+  const [inputDisabled, setInputDisabled] = useState(false);
+
   const { register, handleSubmit, setValue } = useForm({
     defaultValues: {
-      firstName: 'Kyson',
-      lastName: 'Foo',
-      height: 55,
-      weight: 2980,
-      head: 28,
+      firstName: '',
+      lastName: '',
+      height: '',
+      weight: '',
+      head: '',
       birthday: new Date(Date.now()).toJSON(),
     },
   });
-
-  const [inputDisabled, setInputDisabled] = useState(false);
 
   const onSubmitBaby = async (data) => {
     setInputDisabled(true);
