@@ -90,11 +90,11 @@ const DailyTotals = ({ users }) => {
 
   return (
     <>
-      <div className="lg:flex-row rounded-xl w-[22rem] h-[35rem] items-center justify-center mx-auto shadow-lg relative p-8">
-        <h1 className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 text-xl font-bold border-b-2 border-violet-500 text-center mb-12 uppercase">
+      <div className="lg:flex-row rounded-xl w-[18rem] h-[20rem] items-center justify-center mx-auto shadow-lg relative p-6">
+        <h1 className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 text-xl font-bold border-b-2 border-violet-500 text-center uppercase">
           Totals for Today
         </h1>
-        <div className="flex flex-col gap-6 justify-between h-[75%] ml-12">
+        <div className="flex flex-col gap-2 py-4 ml-8">
           <p>
             Nap:
             <span className="font-bold text-xl ml-4 text-violet-500">

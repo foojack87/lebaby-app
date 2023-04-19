@@ -5,10 +5,18 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import ActivityForm from '@/components/ActivityForm/ActivityForm';
+import ConfirmationModal from '@/components/Confirmation/ConfirmationModal';
 import NoBaby from '@/components/NoBaby/NoBaby';
 import { ImSpinner3 } from 'react-icons/im';
+import { useState } from 'react';
 
 const BabyDailies = ({ users, userLoading }) => {
+  const [inputDisabled, setInputDisabled] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [title, setTitle] = useState('');
+  const [message, setMessage] = useState('');
+  const [activityId, setActivityId] = useState(null);
+
   const router = useRouter();
   if (userLoading)
     return (
@@ -26,40 +34,50 @@ const BabyDailies = ({ users, userLoading }) => {
 
   const userEvents = users.activity === undefined ? '' : users.activity;
   console.log(userEvents);
-  // const displayEvents =
-  //   userEvents?.length > 1 ? userEvents?.flat(200) : userEvents;
-  // console.log(displayEvents);
 
   const handleEventClick = async (clickInfo) => {
-    const activityId = +clickInfo.event.id;
-    console.log(typeof activityId);
+    const id = +clickInfo.event.id;
+    console.log(activityId);
+    setTitle('Delete Activity');
+    setMessage(`Press 'Confirm' to delete`);
+    setActivityId(id);
+    setIsModalOpen(true);
+  };
 
-    if (
-      confirm(
-        `Are you sure you want to delete the event '${clickInfo.event.title}'`
-      )
-    ) {
-      // fetch delete
+  const confirmHandler = async () => {
+    setInputDisabled(false);
+    const response = await fetch(`/api/user`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        _id: users._id,
+        activityId,
+      }),
+    });
+    const reponseJson = await response.json();
+    console.log(reponseJson);
 
-      const response = await fetch(`/api/user`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          _id: users._id,
-          activityId,
-        }),
-      });
-      const reponseJson = await response.json();
-      console.log(reponseJson);
+    setInputDisabled(true);
+    setIsModalOpen(false);
+    router.reload();
+  };
 
-      router.reload();
-    }
+  const cancelHandler = (props) => {
+    setIsModalOpen(false);
   };
 
   return (
     <>
+      <ConfirmationModal
+        title={title}
+        message={message}
+        onConfirm={confirmHandler}
+        onCancel={cancelHandler}
+        isOpen={isModalOpen}
+        setIsOpen={setIsModalOpen}
+      />
       <ActivityForm
         users={users}
         events={userEvents}

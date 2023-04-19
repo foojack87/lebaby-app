@@ -4,10 +4,21 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import DailyTotals from '@/components/DailyTotals/DailyTotals';
+import ConfirmationModal from '@/components/Confirmation/ConfirmationModal';
 import NoBaby from '@/components/NoBaby/NoBaby';
 import { ImSpinner3 } from 'react-icons/im';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 const BabyActivity = ({ users, userLoading }) => {
+  const [inputDisabled, setInputDisabled] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [title, setTitle] = useState('');
+  const [message, setMessage] = useState('');
+  const [activityId, setActivityId] = useState(null);
+
+  const router = useRouter();
+
   if (userLoading)
     return (
       <div className="w-[100%] h-[100%] flex justify-center text-6xl text-pink-500">
@@ -29,35 +40,50 @@ const BabyActivity = ({ users, userLoading }) => {
   // console.log(displayEvents);
 
   // handler for deleting an event
+
   const handleEventClick = async (clickInfo) => {
-    const activityId = +clickInfo.event.id;
+    const id = +clickInfo.event.id;
+    console.log(activityId);
+    setTitle('Delete Activity');
+    setMessage(`Press 'Confirm' to delete`);
+    setActivityId(id);
+    setIsModalOpen(true);
+  };
 
-    if (
-      confirm(
-        `Are you sure you want to delete the event '${clickInfo.event.title}'`
-      )
-    ) {
-      // fetch delete
+  const confirmHandler = async () => {
+    setInputDisabled(false);
+    const response = await fetch(`/api/user`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        _id: users._id,
+        activityId,
+      }),
+    });
+    const reponseJson = await response.json();
+    console.log(reponseJson);
 
-      const response = await fetch(`/api/user`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          _id: users._id,
-          activityId,
-        }),
-      });
-      const reponseJson = await response.json();
-      console.log(reponseJson);
+    setInputDisabled(true);
+    setIsModalOpen(false);
+    router.reload();
+  };
 
-      router.reload();
-    }
+  const cancelHandler = (props) => {
+    setIsModalOpen(false);
   };
 
   return (
     <>
+      <ConfirmationModal
+        title={title}
+        message={message}
+        onConfirm={confirmHandler}
+        onCancel={cancelHandler}
+        isOpen={isModalOpen}
+        setIsOpen={setIsModalOpen}
+      />
       <DailyTotals users={users} />
       <div className="w-[45%]">
         <FullCalendar

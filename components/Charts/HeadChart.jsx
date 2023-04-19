@@ -9,9 +9,10 @@ import {
   Legend,
 } from 'chart.js';
 import { Line, getElementAtEvent, getDatasetAtEvent } from 'react-chartjs-2';
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import HeadForm from '../MeasurementsForm/HeadForm';
+import ConfirmationModal from '../Confirmation/ConfirmationModal';
 
 // Chartjs related settings
 
@@ -26,6 +27,12 @@ ChartJS.register(
 );
 
 const HeadChart = ({ currentAge, gender, users, userLoading }) => {
+  const [inputDisabled, setInputDisabled] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [title, setTitle] = useState('');
+  const [message, setMessage] = useState('');
+  const [chartHeadEvent, setChartHeadEvent] = useState(null);
+
   const chartRef = useRef();
   const router = useRouter();
 
@@ -38,35 +45,49 @@ const HeadChart = ({ currentAge, gender, users, userLoading }) => {
 
   // Logic for deleting data entries when clicking on a data point on the chart
   const onClick = async (event) => {
+    setChartHeadEvent(event);
+    console.log(chartHeadEvent);
+
+    setTitle('Delete Activity');
+    setMessage(`Press 'Confirm' to delete`);
+    setIsModalOpen(true);
+  };
+
+  const confirmHandler = async (props) => {
+    setInputDisabled(false);
     const { current: chart } = chartRef;
-    const element = getElementAtEvent(chart, event);
+    const element = getElementAtEvent(chart, chartHeadEvent);
 
     if (element.length) {
       const { datasetIndex, index } = element[0];
-      const confirmDelete = window.confirm(`Confirm delete?`);
-      if (confirmDelete) {
-        console.log(data[index]);
-        const newData = data.filter((_, i) => i !== index);
-        const newLabels = labels.filter((_, i) => i !== index);
-        console.log(newData, newLabels);
 
-        const response = await fetch('/api/baby', {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            _id: users._id,
-            headData: newData,
-            headLabels: newLabels,
-          }),
-        });
+      console.log(data[index]);
+      const newData = data.filter((_, i) => i !== index);
+      const newLabels = labels.filter((_, i) => i !== index);
+      console.log(newData, newLabels);
 
-        const responseJson = response.json();
-        console.log(responseJson);
-      }
+      const response = await fetch('/api/baby', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          _id: users._id,
+          headData: newData,
+          headLabels: newLabels,
+        }),
+      });
+
+      const responseJson = await response.json();
+      console.log(responseJson);
+      setIsModalOpen(false);
+      setInputDisabled(true);
       router.reload();
     }
+  };
+
+  const cancelHandler = (props) => {
+    setIsModalOpen(false);
   };
 
   const options = {
@@ -107,6 +128,14 @@ const HeadChart = ({ currentAge, gender, users, userLoading }) => {
 
   return (
     <>
+      <ConfirmationModal
+        title={title}
+        message={message}
+        onConfirm={confirmHandler}
+        onCancel={cancelHandler}
+        isOpen={isModalOpen}
+        setIsOpen={setIsModalOpen}
+      />
       <div className="flex flex-col mx-auto items-center">
         <HeadForm
           currentAge={currentAge}

@@ -92,13 +92,13 @@ const GrowthChart = ({ users, userLoading }) => {
 
   return (
     <>
-      <div className="flex flex-col rounded-xl w-[14rem] h-[16rem] items-center justify-center mx-auto shadow-lg ml-8">
-        <h1 className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 text-xl font-bold border-b-2 border-violet-500 mb-10">
-          Record Growth
+      <div className="flex flex-col rounded-xl w-[12rem] h-[16rem] items-center justify-center shadow-lg m-6">
+        <h1 className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 text-xl font-bold border-b-2 border-violet-500 mb-6">
+          Measurement
         </h1>
         <div className="flex flex-col gap-6">
           <button
-            className={`shadow-lg rounded py-0.5 px-2 ${
+            className={`shadow-md rounded py-0.5 px-2 ${
               measurement === 'weight'
                 ? 'bg-purple-500 text-white'
                 : 'bg-white text-gray-800'
@@ -108,7 +108,7 @@ const GrowthChart = ({ users, userLoading }) => {
             Weight
           </button>
           <button
-            className={`shadow-lg rounded py-0.5 px-2 ${
+            className={`shadow-md rounded py-0.5 px-2 ${
               measurement === 'height'
                 ? 'bg-purple-500 text-white'
                 : 'bg-white text-gray-800'
@@ -118,14 +118,14 @@ const GrowthChart = ({ users, userLoading }) => {
             Height
           </button>
           <button
-            className={`shadow-lg rounded py-0.5 px-2 ${
+            className={`shadow-md rounded py-0.5 px-2 ${
               measurement === 'head'
                 ? 'bg-purple-500 text-white'
                 : 'bg-white text-gray-800'
             }`}
             onClick={headMeasurement}
           >
-            Head Circumfrence
+            Head
           </button>
         </div>
       </div>

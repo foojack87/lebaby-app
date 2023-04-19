@@ -215,34 +215,37 @@ const WeightForm = ({
   return (
     <div className="flex">
       <form onSubmit={handleSubmit} className="flex gap-12">
-        <div className="flex flex-col gap-2 mb-6">
-          <label>
+        <div className="flex flex-col items-end gap-2 mb-6">
+          <label htmlFor="weight" className="text-gray-600 font-medium mb-1">
             Weight:
             <input
               type="number"
               placeholder="grams"
               name="weight"
-              className="w-[6rem] ml-3"
+              id="weight"
+              className="ml-2 w-[6rem] border border-gray-400 rounded-md py-0.5 px-2 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
             />
           </label>
-          <label>
+          <label htmlFor="age" className="text-gray-600 font-medium mb-1">
             Age:
             <input
               type="number"
               placeholder="months"
               name="age"
+              id="age"
               required
-              className="w-[6rem] ml-3 text-center"
+              className="ml-2 w-[6rem] border border-gray-400 rounded-md py-0.5 px-2 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
             />
           </label>
-          <label>
+          <label htmlFor="gender" className="text-gray-600 font-medium mb-1">
             Gender:
             <input
               type="text"
               name="gender"
+              id="gender"
               disabled
               value={gender}
-              className="w-[6rem] ml-3 text-center"
+              className="ml-2 w-[6rem] border border-gray-400 rounded-md py-0.5 px-2 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
             />
           </label>
         </div>
