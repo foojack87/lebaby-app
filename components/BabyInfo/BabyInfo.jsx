@@ -1,4 +1,4 @@
-import profilepic from '../../public/55.jpg';
+import profilepic from '../../public/babypic.jpg';
 import Image from 'next/image';
 import Modal from '../Modal/Modal';
 import EditBaby from './EditBaby';
@@ -209,7 +209,11 @@ const BabyInfo = ({ users }) => {
         </div>
         <div className="flex items-center pt-[8rem] justify-between relative mr-6 ml">
           <div className="border-[6px] rounded-full absolute top-[1rem] overflow-hidden w-[10rem] h-[10rem] border-white">
-            <Image src={profilepic} alt="profile pic" className="w-[10rem]" />
+            <Image
+              src={profilepic}
+              alt="profile pic"
+              className="w-full h-full"
+            />
           </div>
           <div className="flex items-center mt-12 ml-4 gap-2">
             <span className="text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 font-bold">

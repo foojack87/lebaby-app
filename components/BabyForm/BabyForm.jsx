@@ -84,7 +84,7 @@ const BabyForm = ({ users, userLoading }) => {
             id="weight"
             {...register('weight', {
               required: true,
-              maxLength: 3,
+              maxLength: 4,
               minLength: 4,
             })}
           />

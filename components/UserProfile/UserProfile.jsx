@@ -1,4 +1,4 @@
-import profilepic from '../../public/55.jpg';
+import profilepic from '../../public/babypic.jpg';
 import useUserData from '@/utils/useUserData';
 import Image from 'next/image';
 import { ImSpinner3 } from 'react-icons/im';

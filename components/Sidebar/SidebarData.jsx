@@ -18,7 +18,7 @@ const SidebarData = ({ toggle }) => {
             </div>
             <div
               className={`${
-                toggle ? 'opacity-0' : ''
+                toggle ? 'hidden' : ''
               } sm:text-[1rem] text-[0.8rem] text-brown whitespace-pre`}
             >
               {link.text}
