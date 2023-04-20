@@ -9,7 +9,7 @@ const UserProfile = ({ toggle }) => {
 
   if (userLoading)
     return (
-      <div className="w-[100%] h-[100%] flex justify-center text-4xl text-pink-500">
+      <div className="w-[100%] h-[3.5rem] flex justify-center text-4xl text-pink-500">
         <ImSpinner3 className="animate-spin" />
       </div>
     );

@@ -22,7 +22,7 @@ export default withApiAuthRequired(async function handler(req, res) {
           },
           body: JSON.stringify({
             dataSource: process.env.MONGODB_DATA_SOURCE,
-            database: 'lebaby',
+            database: 'social_butterfly',
             collection: 'users',
           }),
         });
@@ -39,7 +39,7 @@ export default withApiAuthRequired(async function handler(req, res) {
             },
             body: JSON.stringify({
               dataSource: process.env.MONGODB_DATA_SOURCE,
-              database: 'lebaby',
+              database: 'social_butterfly',
               collection: 'users',
               filter: { _id: { $oid: readDataJson.document._id } },
               update: {
@@ -73,7 +73,7 @@ export default withApiAuthRequired(async function handler(req, res) {
           },
           body: JSON.stringify({
             dataSource: process.env.MONGODB_DATA_SOURCE,
-            database: 'lebaby',
+            database: 'social_butterfly',
             collection: 'users',
             filter: { _id: { $oid: req.body._id } },
             update: {
@@ -101,7 +101,7 @@ export default withApiAuthRequired(async function handler(req, res) {
           },
           body: JSON.stringify({
             dataSource: process.env.MONGODB_DATA_SOURCE,
-            database: 'lebaby',
+            database: 'social_butterfly',
             collection: 'users',
             filter: {
               _id: { $oid: req.body._id },
