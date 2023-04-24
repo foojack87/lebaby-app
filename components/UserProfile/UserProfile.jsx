@@ -35,7 +35,7 @@ const UserProfile = ({ toggle }) => {
         />
       </div>
       <div className={toggle ? 'opacity-0 delay-200' : ''}>
-        <h3 className="md:text-xl text-sm">{username}</h3>
+        <h3 className="hidden sm:block md:text-xl text-sm">{username}</h3>
       </div>
     </div>
   );

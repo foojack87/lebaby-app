@@ -1,4 +1,3 @@
-import styles from '@/styles';
 import Image from 'next/image';
 import AnchorLink from '../AnchorLink/AnchorLink';
 import { useUser } from '@auth0/nextjs-auth0/client';
@@ -8,18 +7,19 @@ const NavBar = (props) => {
 
   return (
     <>
-      <nav className={`${styles.xPaddings} py-6 relative`}>
-        <div className="w-[50%] absolute inset-0 gradient-01" />
+      <nav className="sm:px-16 px-6 py-6 relative">
+        <div className="sm:w-[50%] absolute inset-0 gradient-01" />
         <div
-          className={`${styles.innerWidth} mx-auto flex justify-between gap-8 ${styles.flexCenter}`}
+          className={`2xl:max-w-[1280px] w-full mx-auto flex justify-between sm:gap-8 items-center`}
         >
-          <Image
-            src="/lebaby-logo.png"
-            alt="logo"
-            width="168"
-            height="48"
-            className="sm:w-[168px] w-[128px]"
-          />
+          <div className="w-[168px] h-[48px] relative">
+            <Image
+              src="/lebaby-logo.png"
+              alt="logo"
+              fill
+              className="object-contain"
+            />
+          </div>
           {!user && (
             <AnchorLink
               href="/BabyProfile"

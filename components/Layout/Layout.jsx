@@ -1,7 +1,6 @@
 import NavBar from '../Navbar/Navbar';
 import Sidebar from '../Sidebar/Sidebar';
 import Footer from '../Footer/Footer';
-import styles from '@/styles';
 import { useUser } from '@auth0/nextjs-auth0/client';
 
 const Layout = ({ children, users, userLoading }) => {
@@ -11,18 +10,18 @@ const Layout = ({ children, users, userLoading }) => {
 
   return (
     <>
-      <NavBar />
-      <main
-        className={`${styles.innerWidth} mx-auto sm:px-16 px-6 min-h-[70vh]`}
-      >
-        <div className="object-cover sm:flex items-center justify-between">
-          {user && (
-            <Sidebar users={users} userLoading={userLoading} error={error} />
-          )}
-          {children}
-        </div>
-      </main>
-      <Footer />
+      <div className="flex flex-col min-h-screen">
+        <NavBar />
+        <main className="max-w-screen-lg w-full mx-auto px-6">
+          <div className="sm:flex justify-between">
+            {user && (
+              <Sidebar users={users} userLoading={userLoading} error={error} />
+            )}
+            {children}
+          </div>
+        </main>
+        <Footer />
+      </div>
     </>
   );
 };

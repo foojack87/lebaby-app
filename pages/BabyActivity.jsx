@@ -21,17 +21,12 @@ const BabyActivity = ({ users, userLoading }) => {
 
   if (userLoading)
     return (
-      <div className="w-[100%] h-[100%] flex justify-center text-6xl text-pink-500">
-        <ImSpinner3 className="animate-spin" />
+      <div className="w-full flex justify-center items-center">
+        <ImSpinner3 className="animate-spin text-6xl text-pink-500" />
       </div>
     );
 
-  if (!users.baby)
-    return (
-      <div className="w-[54rem] h-full ml-4">
-        <NoBaby />
-      </div>
-    );
+  if (!users.baby) return <NoBaby />;
 
   // to get activity data to be displayable in the calendar
   const userEvents = users.activity === undefined ? '' : users.activity;

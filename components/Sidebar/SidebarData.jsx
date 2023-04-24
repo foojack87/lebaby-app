@@ -3,23 +3,23 @@ import Link from 'next/link';
 
 const SidebarData = ({ toggle }) => {
   return (
-    <div>
+    <div className="flex sm:flex-col">
       {datas.map((link, index) => {
         return (
           <Link
             key={index}
             href={link.path}
             className={`${
-              toggle ? 'last:w-[3.6rem]' : 'last:w-[17rem]'
-            } sidebar last:absolute left-4 bottom-4`}
+              toggle ? 'last:w-[3.6rem]' : 'last:w-[12rem]'
+            } flex items-center mt-2 p-4 rounded-lg cursor-pointer hover:bg-white transition-all duration-300 sm:last:absolute sm:left-4 sm:bottom-4`}
           >
-            <div className="mr-8 sm:text-[1.7rem] text-[1.2rem] text-brown">
+            <div className="sm:mr-8 sm:text-[1.7rem] text-[1.2rem] text-brown">
               {link.icon}
             </div>
             <div
               className={`${
-                toggle ? 'hidden' : ''
-              } sm:text-[1rem] text-[0.8rem] text-brown whitespace-pre`}
+                toggle ? 'hidden' : 'sm:block'
+              } hidden sm:text-[1rem] text-[0.8rem] text-brown whitespace-pre`}
             >
               {link.text}
             </div>
@@ -28,94 +28,6 @@ const SidebarData = ({ toggle }) => {
       })}
     </div>
   );
-  // return (
-  //   <>
-  //     <Links
-  //       href="/BabyProfile"
-  //       className={`${
-  //         toggle ? 'last:w-[3.6rem]' : 'last:w-[17rem]'
-  //       } sidebar last:absolute left-4 bottom-4`}
-  //     >
-  //       <div className="mr-8 text-[1.7rem] text-brown">
-  //         <RxDashboard />
-  //       </div>
-  //       <div
-  //         className={`${
-  //           toggle ? 'opacity-0' : ''
-  //         } text-[1rem] text-brown whitespace-pre`}
-  //       >
-  //         Baby Profile
-  //       </div>
-  //     </Links>
-  //     <Links
-  //       href="/BabyActivity"
-  //       className={`${
-  //         toggle ? 'last:w-[3.6rem]' : 'last:w-[17rem]'
-  //       } sidebar last:absolute left-4 bottom-4`}
-  //     >
-  //       <div className="mr-8 text-[1.7rem] text-brown">
-  //         <RxDashboard />
-  //       </div>
-  //       <div
-  //         className={`${
-  //           toggle ? 'opacity-0' : ''
-  //         } text-[1rem] text-brown whitespace-pre`}
-  //       >
-  //         Past Activity
-  //       </div>
-  //     </Links>
-  //     <Links
-  //       href="/BabyDailies"
-  //       className={`${
-  //         toggle ? 'last:w-[3.6rem]' : 'last:w-[17rem]'
-  //       } sidebar last:absolute left-4 bottom-4`}
-  //     >
-  //       <div className="mr-8 text-[1.7rem] text-brown">
-  //         <RxDashboard />
-  //       </div>
-  //       <div
-  //         className={`${
-  //           toggle ? 'opacity-0' : ''
-  //         } text-[1rem] text-brown whitespace-pre`}
-  //       >
-  //         Daily Activity
-  //       </div>
-  //     </Links>
-  //     <Links
-  //       href="/GrowthChart"
-  //       className={`${
-  //         toggle ? 'last:w-[3.6rem]' : 'last:w-[17rem]'
-  //       } sidebar last:absolute left-4 bottom-4`}
-  //     >
-  //       <div className="mr-8 text-[1.7rem] text-brown">
-  //         <RxDashboard />
-  //       </div>
-  //       <div
-  //         className={`${
-  //           toggle ? 'opacity-0' : ''
-  //         } text-[1rem] text-brown whitespace-pre`}
-  //       >
-  //         Growth Chart
-  //       </div>
-  //     </Links>
-  //     <div
-  //       className={`${
-  //         toggle ? 'w-[3.6rem]' : 'w-[17rem]'
-  //       } sidebar absolute left-4 bottom-4`}
-  //     >
-  //       <div className="mr-8 text-[1.7rem] text-brown">
-  //         <RxDashboard />
-  //       </div>
-  //       <div
-  //         className={`${
-  //           toggle ? 'opacity-0' : ''
-  //         } text-[1rem] text-brown whitespace-pre`}
-  //       >
-  //         Switch Baby
-  //       </div>
-  //     </div>
-  //   </>
-  // );
 };
 
 export default SidebarData;
