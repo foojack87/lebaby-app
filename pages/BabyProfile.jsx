@@ -27,7 +27,7 @@ const BabyProfile = ({ users, userLoading }) => {
   return (
     <>
       <section className="w-full flex justify-center items-center">
-        <div className="w-full max-w-[54rem]">
+        <div className="w-full sm:w-[32rem] px-6">
           <BabyInfo users={users} />
         </div>
       </section>

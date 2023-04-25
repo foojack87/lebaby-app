@@ -196,49 +196,52 @@ const BabyInfo = ({ users }) => {
           />
         </Modal>
       )}
-      <div className="container w-[55%] bg-white rounded-xl mx-auto shadow-lg px-8 py-6 relative overflow-hidden">
+      <div className="container flex-grow bg-white rounded-xl mx-auto shadow-lg px-2 sm:px-8 py-6 relative overflow-hidden">
         <div className="bg-gradient-to-r from-pink-500 to-violet-500 h-[8rem] absolute w-full inset-0 ">
-          <div className="absolute top-[2rem] right-[4rem] text-white flex items-center gap-2">
-            <span className="text-2xl">Horoscope:</span>
-            <span className="text-4xl">{horoscope.icon}</span>
+          <div className="absolute top-[2rem] sm:right-[4rem] right-[1.5rem] text-white flex items-center gap-2">
+            <span className="sm:text-2xl">Horoscope:</span>
+            <span className="text-2xl sm:text-4xl">{horoscope.icon}</span>
           </div>
-          <div className="absolute top-[4.5rem] right-[4rem] text-white flex items-center gap-2">
-            <span className="text-2xl">Zodiac:</span>
-            <span className="text-4xl">{chineseZodiac.icon}</span>
+          <div className="absolute top-[4.5rem] sm:right-[4rem] right-[1.5rem] text-white flex items-center gap-2">
+            <span className="sm:text-2xl">Zodiac:</span>
+            <span className="text-2xl sm:text-4xl">{chineseZodiac.icon}</span>
           </div>
         </div>
-        <div className="flex items-center pt-[8rem] justify-between relative mr-6 ml">
-          <div className="border-[6px] rounded-full absolute top-[1rem] overflow-hidden w-[10rem] h-[10rem] border-white">
+        <div className="flex items-center pt-[8rem] justify-between relative sm:mr-6 ml-6 sm:ml-0 sm:gap-1 gap-4">
+          <div className="border-[6px] rounded-full absolute top-[3.5rem] sm:top-[1rem] left-[-1rem] sm:left-0 overflow-hidden w-[6rem] sm:w-[10rem] h-[6rem] sm:h-[10rem] border-white">
             <Image
               src={profilepic}
               alt="profile pic"
               className="w-full h-full"
             />
           </div>
-          <div className="flex items-center mt-12 ml-4 gap-2">
-            <span className="text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 font-bold">
+          <div className="flex-col flex sm:flex-row items-center mt-12 sm:ml-4 gap-2">
+            <span className="sm:text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 font-bold">
               {firstName} {lastName}
             </span>
-            <span className="text-2xl text-violet-500">{genderIcon}</span>
+            <span className="sm:text-2xl text-violet-500">{genderIcon}</span>
           </div>
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
-              <FaBirthdayCake className="text-xl text-violet-500" /> {birthday}
+              <FaBirthdayCake className="sm:text-lg text-violet-500" />{' '}
+              <span className="text-sm sm:text-xl">{birthday}</span>
             </div>
 
             <div className="flex items-center gap-2">
-              <TfiRuler className="text-xl text-violet-500" /> {height}cm
+              <TfiRuler className="sm:text-xl text-violet-500" />{' '}
+              <span className="text-sm sm:text-xl">{height}cm</span>
             </div>
             <div className="flex items-center gap-2">
-              <GiWeightScale className="text-xl text-violet-500" /> {weight}g
+              <GiWeightScale className="sm:text-xl text-violet-500" />{' '}
+              <span className="text-sm sm:text-xl">{weight}g</span>
             </div>
             <div className="flex items-center gap-2">
-              <RxRulerHorizontal className="text-xl text-violet-500" />
-              {head}cm
+              <RxRulerHorizontal className="sm:text-xl text-violet-500" />
+              <span className="text-sm sm:text-xl">{head}cm</span>
             </div>
             <div className="flex items-center gap-2">
-              <TbMoodBoy className="text-xl text-violet-500" />
-              {age}
+              <TbMoodBoy className="sm:text-xl text-violet-500" />
+              <span className="text-sm sm:text-xl">{age}</span>
             </div>
           </div>
         </div>

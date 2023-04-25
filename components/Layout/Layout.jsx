@@ -12,7 +12,7 @@ const Layout = ({ children, users, userLoading }) => {
     <>
       <div className="flex flex-col min-h-screen">
         <NavBar />
-        <main className="max-w-screen-lg w-full mx-auto px-6">
+        <main className="max-w-screen-lg w-full mx-auto px-6 flex-grow">
           <div className="sm:flex justify-between">
             {user && (
               <Sidebar users={users} userLoading={userLoading} error={error} />

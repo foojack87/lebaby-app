@@ -11,11 +11,11 @@ const CreateBaby = ({ users, userLoading }) => {
 
   return (
     <div>
-      <div className="container mx-auto w-[54rem] h-full ml-4">
+      <div className="w-full flex justify-center items-center">
         <div className="flex flex-col lg:flex-row w-10/12 lg:w-8/12 bg-white rounded-xl mx-auto shadow-lg overflow-hidden">
-          <div className="w-full lg:w-1/2 py-16 px-12 flex flex-col items-center justify-center">
-            <h2 className="text-3xl mb-4">Welcome!</h2>
-            <p className="mb-4 text-center">
+          <div className="w-full lg:w-1/2 lg:py-16 pt-8 px-12 flex flex-col items-center justify-center">
+            <h2 className="text-3xl mb-4 text-violet-500">Welcome!</h2>
+            <p className="text-center hidden sm:block">
               Taking care of a newborn can be tough, and we are here to make it
               easier!
             </p>

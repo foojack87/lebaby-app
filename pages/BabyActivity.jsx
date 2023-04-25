@@ -80,7 +80,7 @@ const BabyActivity = ({ users, userLoading }) => {
         setIsOpen={setIsModalOpen}
       />
       <DailyTotals users={users} />
-      <div className="w-[45%]">
+      <div className="flex flex-grow flex-col">
         <FullCalendar
           initialEvents={userEvents}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}

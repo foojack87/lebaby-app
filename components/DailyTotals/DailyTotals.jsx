@@ -90,50 +90,52 @@ const DailyTotals = ({ users }) => {
 
   return (
     <>
-      <div className="lg:flex-row rounded-xl w-[18rem] h-[20rem] items-center justify-center mx-auto shadow-lg relative p-6">
-        <h1 className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 text-xl font-bold border-b-2 border-violet-500 text-center uppercase">
-          Totals for Today
-        </h1>
-        <div className="flex flex-col gap-2 py-4 ml-8">
-          <p>
-            Nap:
-            <span className="font-bold text-xl ml-4 text-violet-500">
-              {totalNapMinutes} mins
-            </span>
-          </p>
-          <p>
-            Feedings:
-            <span className="font-bold text-xl ml-4 text-violet-500">
-              {fed?.length > 0 ? fed.length : 0}
-              {fed?.length === 1 ? ' time' : ' times'}
-            </span>
-          </p>
-          <p>
-            Bottle Fed:
-            <span className="font-bold text-xl ml-4 text-violet-500">
-              {totalBottleFedMl}ml
-            </span>
-          </p>
-          <p>
-            Pooped:
-            <span className="font-bold text-xl ml-4 text-violet-500">
-              {poopsToday?.length > 0 ? poopsToday?.length : 0}
-              {poopsToday?.length === 1 ? ' time' : ' times'}
-            </span>
-          </p>
-          <p>
-            Peed:
-            <span className="font-bold text-xl ml-4 text-violet-500">
-              {peesToday?.length > 0 ? peesToday?.length : 0}
-              {peesToday?.length === 1 ? ' time' : ' times'}
-            </span>
-          </p>
-          <p>
-            Pumped:
-            <span className="font-bold text-xl ml-4 text-violet-500">
-              {totalPumpedMl}ml
-            </span>
-          </p>
+      <div className="h-full px-6 mb-4 place-self-center">
+        <div className="lg:flex-row rounded-xl items-center justify-center text-center sm:text-left shadow-lg relative p-6">
+          <h1 className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 text-xl font-bold border-b-2 border-violet-500 text-center uppercase">
+            Totals for Today
+          </h1>
+          <div className="flex flex-col gap-2 py-4 ml-8">
+            <p>
+              Nap:
+              <span className="font-bold sm:text-xl ml-4 text-violet-500">
+                {totalNapMinutes} mins
+              </span>
+            </p>
+            <p>
+              Feedings:
+              <span className="font-bold sm:text-xl ml-4 text-violet-500">
+                {fed?.length > 0 ? fed.length : 0}
+                {fed?.length === 1 ? ' time' : ' times'}
+              </span>
+            </p>
+            <p>
+              Bottle Fed:
+              <span className="font-bold sm:text-xl ml-4 text-violet-500">
+                {totalBottleFedMl}ml
+              </span>
+            </p>
+            <p>
+              Pooped:
+              <span className="font-bold sm:text-xl ml-4 text-violet-500">
+                {poopsToday?.length > 0 ? poopsToday?.length : 0}
+                {poopsToday?.length === 1 ? ' time' : ' times'}
+              </span>
+            </p>
+            <p>
+              Peed:
+              <span className="font-bold sm:text-xl ml-4 text-violet-500">
+                {peesToday?.length > 0 ? peesToday?.length : 0}
+                {peesToday?.length === 1 ? ' time' : ' times'}
+              </span>
+            </p>
+            <p>
+              Pumped:
+              <span className="font-bold sm:text-xl ml-4 text-violet-500">
+                {totalPumpedMl}ml
+              </span>
+            </p>
+          </div>
         </div>
       </div>
     </>

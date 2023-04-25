@@ -67,7 +67,7 @@ const EditBaby = ({
         onSubmit={handleSubmit(onSubmitEditBaby)}
       >
         <div className="flex justify-between">
-          <div>
+          <div className="mr-2">
             <div className="mb-4">
               <label
                 className="block text-gray-700 font-bold mb-2"
@@ -184,11 +184,11 @@ const EditBaby = ({
             </div>
           </div>
         </div>
-        <div className="flex mt-5 border rounded-full overflow-hidden select-none w-[70%] mx-auto">
+        <div className="flex mt-5 border rounded-full overflow-hidden select-none w-full mx-auto">
           <div className=" px-2 py-1 bg-purple-500 text-white text-sm font-semibold mr-3">
             Gender
           </div>
-          <div className="flex mx-auto w-full justify-between">
+          <div className="flex mx-auto w-full justify-evenly">
             <label className="flex radio cursor-pointer place-items-center">
               <input
                 className="transform scale-95"
@@ -208,16 +208,6 @@ const EditBaby = ({
                 {...register('gender', { required: true })}
               />
               <div className="pl-1 pr-2 text-[0.8rem]">Girl</div>
-            </label>
-            <label className="flex radio cursor-pointer place-items-center">
-              <input
-                className="transform scale-95"
-                type="radio"
-                value="neutral"
-                id="field-neutral"
-                {...register('gender', { required: true })}
-              />
-              <div className="pl-1 pr-4 text-[0.8rem]">Neutral</div>
             </label>
           </div>
         </div>

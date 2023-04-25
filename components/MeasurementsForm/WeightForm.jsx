@@ -214,8 +214,11 @@ const WeightForm = ({
 
   return (
     <div className="flex">
-      <form onSubmit={handleSubmit} className="flex gap-12">
-        <div className="flex flex-col items-end gap-2 mb-6">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col sm:flex-row sm:gap-12"
+      >
+        <div className="flex flex-col items-end gap-2 mb-4 sm:mb-6">
           <label htmlFor="weight" className="text-gray-600 font-medium mb-1">
             Weight:
             <input
@@ -252,7 +255,7 @@ const WeightForm = ({
         <div className="place-self-center">
           <button
             type="submit"
-            className="shadow-lg rounded-xl border w-[6rem] h-[2.5rem] bg-purple-500 text-center text-white px-2 py-1"
+            className="shadow-lg rounded-xl border w-[6rem] h-[2.5rem] bg-purple-500 text-center text-white px-2 py-1 mb-4 "
             disabled={inputDisabled}
           >
             {inputDisabled ? spinner : 'Add Data'}

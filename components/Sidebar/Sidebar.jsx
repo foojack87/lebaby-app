@@ -17,8 +17,8 @@ const Sidebar = ({ users }) => {
     // <div className="fixed bottom-0">
     <div
       className={`${
-        toggle ? 'sm:w-[5.8rem]' : 'sm:w-[12rem] md:w-[14rem] w-[10rem]'
-      }  bg-glass sm:h-[36rem] h-[6rem] mb-6 sm:mb-0 rounded-3xl ml-6 p-4 border transition-all duration-500 border-solid border-glass relative place-self-start`}
+        toggle ? 'sm:w-[5.8rem]' : 'sm:w-[12rem] md:w-[14rem]'
+      }  bg-glass sm:h-[36rem] h-[6rem] mb-6 sm:mb-0 rounded-3xl sm:ml-6 p-4 border transition-all duration-500 border-solid border-glass relative place-self-start`}
     >
       <div className="flex sm:flex-col">
         <UserProfile toggle={toggle} />

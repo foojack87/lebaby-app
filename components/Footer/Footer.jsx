@@ -4,7 +4,7 @@ import Image from 'next/image';
 const Footer = (props) => {
   return (
     <>
-      <footer className="bottom-0">
+      <footer className="">
         <div className={`${styles.xPaddings} py-8 relative`}>
           <div className="footer-gradient z-0 absolute" />
           <div className={`${styles.innerWidth} mx-auto flex flex-col gap-8`}>

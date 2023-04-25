@@ -209,111 +209,113 @@ const ActivityForm = ({ users, events, userLoading }) => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row rounded-xl w-[22rem] h-[28rem] items-center justify-center mx-auto shadow-lg relative">
-      <h1 className="absolute left-[center] top-[10%] bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 text-xl font-bold border-b-2 border-violet-500">
-        Record An Activity
-      </h1>
-      <div className="flex flex-col gap-4 mr-6">
-        <button
-          className={`shadow-md rounded py-0.5 px-2 ${
-            activityType === 'breastFeed'
-              ? 'bg-purple-500 text-white'
-              : 'bg-white text-gray-800'
-          }`}
-          onClick={changeBreastFeed}
+    <div className="flex flex-grow px-4 place-self-center">
+      <div className="flex flex-col flex-grow lg:flex-row rounded-xl items-center justify-center mx-auto shadow-lg relative p-6">
+        <div className="flex flex-col gap-4 mb-2 lg:mr-6">
+          <h1 className="mb-2 bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 text-xl font-bold border-b-2 border-violet-500">
+            Record An Activity
+          </h1>
+          <button
+            className={`shadow-md rounded py-0.5 px-2 ${
+              activityType === 'breastFeed'
+                ? 'bg-purple-500 text-white'
+                : 'bg-white text-gray-800'
+            }`}
+            onClick={changeBreastFeed}
+          >
+            Breast Feed
+          </button>
+          <button
+            className={`shadow-md rounded py-0.5 px-2 ${
+              activityType === 'bottleFeed'
+                ? 'bg-purple-500 text-white'
+                : 'bg-white text-gray-800'
+            }`}
+            onClick={changeBottleFeed}
+          >
+            Bottle Feed
+          </button>
+          <button
+            className={`shadow-md rounded py-0.5 px-2 ${
+              activityType === 'poop'
+                ? 'bg-purple-500 text-white'
+                : 'bg-white text-gray-800'
+            }`}
+            onClick={changePoop}
+          >
+            Poop
+          </button>
+          <button
+            className={`shadow-md rounded py-0.5 px-2 ${
+              activityType === 'pee'
+                ? 'bg-purple-500 text-white'
+                : 'bg-white text-gray-800'
+            }`}
+            onClick={changePee}
+          >
+            Pee
+          </button>
+          <button
+            className={`shadow-md rounded py-0.5 px-2 ${
+              activityType === 'nap'
+                ? 'bg-purple-500 text-white'
+                : 'bg-white text-gray-800'
+            }`}
+            onClick={changeNap}
+          >
+            Nap
+          </button>
+          <button
+            className={`shadow-md rounded py-0.5 px-2 ${
+              activityType === 'breastPump'
+                ? 'bg-purple-500 text-white'
+                : 'bg-white text-gray-800'
+            }`}
+            onClick={changeBreastPump}
+          >
+            Breast Pump
+          </button>
+        </div>
+        <form
+          onSubmit={onSubmitActivity}
+          className="flex flex-col items-center gap-6"
         >
-          Breast Feed
-        </button>
-        <button
-          className={`shadow-md rounded py-0.5 px-2 ${
-            activityType === 'bottleFeed'
-              ? 'bg-purple-500 text-white'
-              : 'bg-white text-gray-800'
-          }`}
-          onClick={changeBottleFeed}
-        >
-          Bottle Feed
-        </button>
-        <button
-          className={`shadow-md rounded py-0.5 px-2 ${
-            activityType === 'poop'
-              ? 'bg-purple-500 text-white'
-              : 'bg-white text-gray-800'
-          }`}
-          onClick={changePoop}
-        >
-          Poop
-        </button>
-        <button
-          className={`shadow-md rounded py-0.5 px-2 ${
-            activityType === 'pee'
-              ? 'bg-purple-500 text-white'
-              : 'bg-white text-gray-800'
-          }`}
-          onClick={changePee}
-        >
-          Pee
-        </button>
-        <button
-          className={`shadow-md rounded py-0.5 px-2 ${
-            activityType === 'nap'
-              ? 'bg-purple-500 text-white'
-              : 'bg-white text-gray-800'
-          }`}
-          onClick={changeNap}
-        >
-          Nap
-        </button>
-        <button
-          className={`shadow-md rounded py-0.5 px-2 ${
-            activityType === 'breastPump'
-              ? 'bg-purple-500 text-white'
-              : 'bg-white text-gray-800'
-          }`}
-          onClick={changeBreastPump}
-        >
-          Breast Pump
-        </button>
+          {activityType === 'bottleFeed' && bottleFeed}
+          {activityType === 'breastFeed' && breastFeed}
+          {activityType === 'poop' && poop}
+          {activityType === 'pee' && pee}
+          {activityType === 'nap' && nap}
+          {activityType === 'breastPump' && breastPump}
+          <div>
+            <label htmlFor="start" className="text-gray-700">
+              Started
+            </label>
+            <Datetime
+              id="start"
+              value={start}
+              onChange={startChangeHandler}
+              className="text-sm border border-gray-400 rounded-md py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
+            />
+          </div>
+          <div>
+            <label htmlFor="end" className="text-gray-700">
+              Ended
+            </label>
+            <Datetime
+              id="end"
+              value={end}
+              onChange={endChangeHandler}
+              className="text-sm border border-gray-400 rounded-md py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
+            />
+          </div>
+          <button
+            className="shadow-lg w-[9rem] h-[3rem] rounded-xl border bg-purple-500 text-center text-white px-6 py-3"
+            disabled={inputDisabled}
+          >
+            {inputDisabled ? spinner : 'Add Activity'}
+          </button>
+        </form>
       </div>
-      <form
-        onSubmit={onSubmitActivity}
-        className="flex flex-col items-center gap-6"
-      >
-        {activityType === 'bottleFeed' && bottleFeed}
-        {activityType === 'breastFeed' && breastFeed}
-        {activityType === 'poop' && poop}
-        {activityType === 'pee' && pee}
-        {activityType === 'nap' && nap}
-        {activityType === 'breastPump' && breastPump}
-        <div>
-          <label htmlFor="start" className="text-gray-700">
-            Started
-          </label>
-          <Datetime
-            id="start"
-            value={start}
-            onChange={startChangeHandler}
-            className="text-sm border border-gray-400 rounded-md py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
-          />
-        </div>
-        <div>
-          <label htmlFor="end" className="text-gray-700">
-            Ended
-          </label>
-          <Datetime
-            id="end"
-            value={end}
-            onChange={endChangeHandler}
-            className="text-sm border border-gray-400 rounded-md py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
-          />
-        </div>
-        <button
-          className="shadow-lg w-[9rem] h-[3rem] rounded-xl border bg-purple-500 text-center text-white px-6 py-3 absolute bottom-[6%] left-[31%]"
-          disabled={inputDisabled}
-        >
-          {inputDisabled ? spinner : 'Add Activity'}
-        </button>
-      </form>
     </div>
   );
 };

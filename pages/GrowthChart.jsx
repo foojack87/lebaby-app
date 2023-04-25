@@ -87,44 +87,46 @@ const GrowthChart = ({ users, userLoading }) => {
 
   return (
     <>
-      <div className="flex flex-col rounded-xl w-[12rem] h-[16rem] items-center justify-center shadow-lg m-6">
-        <h1 className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 text-xl font-bold border-b-2 border-violet-500 mb-6">
-          Measurement
-        </h1>
-        <div className="flex flex-col gap-6">
-          <button
-            className={`shadow-md rounded py-0.5 px-2 ${
-              measurement === 'weight'
-                ? 'bg-purple-500 text-white'
-                : 'bg-white text-gray-800'
-            }`}
-            onClick={weightMeasurement}
-          >
-            Weight
-          </button>
-          <button
-            className={`shadow-md rounded py-0.5 px-2 ${
-              measurement === 'height'
-                ? 'bg-purple-500 text-white'
-                : 'bg-white text-gray-800'
-            }`}
-            onClick={heightMeasurement}
-          >
-            Height
-          </button>
-          <button
-            className={`shadow-md rounded py-0.5 px-2 ${
-              measurement === 'head'
-                ? 'bg-purple-500 text-white'
-                : 'bg-white text-gray-800'
-            }`}
-            onClick={headMeasurement}
-          >
-            Head
-          </button>
+      <div className="px-6 mb-6 flex place-self-center justify-center ">
+        <div className="flex flex-col rounded-xl items-center justify-center shadow-lg p-6">
+          <h1 className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 text-xl font-bold border-b-2 border-violet-500 mb-6">
+            Measurement
+          </h1>
+          <div className="flex sm:flex-col gap-6">
+            <button
+              className={`shadow-md rounded py-0.5 px-2 ${
+                measurement === 'weight'
+                  ? 'bg-purple-500 text-white'
+                  : 'bg-white text-gray-800'
+              }`}
+              onClick={weightMeasurement}
+            >
+              Weight
+            </button>
+            <button
+              className={`shadow-md rounded py-0.5 px-2 ${
+                measurement === 'height'
+                  ? 'bg-purple-500 text-white'
+                  : 'bg-white text-gray-800'
+              }`}
+              onClick={heightMeasurement}
+            >
+              Height
+            </button>
+            <button
+              className={`shadow-md rounded py-0.5 px-2 ${
+                measurement === 'head'
+                  ? 'bg-purple-500 text-white'
+                  : 'bg-white text-gray-800'
+              }`}
+              onClick={headMeasurement}
+            >
+              Head
+            </button>
+          </div>
         </div>
       </div>
-      <div className="flex w-[65%] h-[50%]">
+      <div className="flex">
         {measurement === 'weight' && (
           <WeightChart
             currentAge={age}

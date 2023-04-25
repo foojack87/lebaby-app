@@ -23,7 +23,7 @@ const NavBar = (props) => {
           {!user && (
             <AnchorLink
               href="/BabyProfile"
-              className="h-[48px] sm:py-2 sm:px-6 py-1 px-3 flex-center"
+              className="h-[48px] sm:py-2 sm:px-6 py-1 px-3 flex-center z-[99]"
             >
               login
             </AnchorLink>

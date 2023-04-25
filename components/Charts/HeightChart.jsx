@@ -91,6 +91,22 @@ const HeightChart = ({ currentAge, gender, users, userLoading }) => {
 
   const options = {
     responsive: true,
+    scales: {
+      y: {
+        ticks: {
+          font: {
+            size: 8,
+          },
+        },
+      },
+      x: {
+        ticks: {
+          font: {
+            size: 6,
+          },
+        },
+      },
+    },
     plugins: {
       legend: {
         position: 'top',
@@ -135,7 +151,7 @@ const HeightChart = ({ currentAge, gender, users, userLoading }) => {
         isOpen={isModalOpen}
         setIsOpen={setIsModalOpen}
       />
-      <div className="flex flex-col mx-auto items-center">
+      <div className="flex flex-col mx-auto items-center overflow-hidden">
         <HeightForm
           currentAge={currentAge}
           gender={gender}
@@ -144,18 +160,19 @@ const HeightChart = ({ currentAge, gender, users, userLoading }) => {
           heightData={data}
           heightLabels={labels}
         />
-        <div className="w-[600px]">
+        <div className="w-full">
           <Line
             options={options}
             data={chartData}
             onClick={onClick}
             ref={chartRef}
           />
-          <div className="text-center mt-3">
+          <div className="text-center text-sm mt-3">
             <p>*Growth percentile for reference only.</p>
             <p>*Click on a data point to delete the data.</p>
           </div>
-          <div>
+
+          <div className="hidden sm:block text-sm mt-3">
             <p className="underline">References</p>
             <p>
               LMS Parameters for Girls: Length-for-age. World Health

@@ -42,21 +42,21 @@ const BabyForm = ({ users, userLoading }) => {
   return (
     <>
       <form
-        className="py-8 pr-12 sm:pl-0 pl-12"
+        className="py-8 px-12 lg:pl-0"
         onSubmit={handleSubmit(onSubmitBaby)}
       >
-        <div className="grid grid-cols-2 gap-5">
+        <div className="grid sm:grid-cols-2 gap-5">
           <input
             type="text"
             placeholder="Firstname"
-            className="border border-gray-400 py-1 px-2"
+            className="border border-gray-400 py-1 px-2 w-full"
             id="firstname"
             {...register('firstName', { required: true, maxLength: 20 })}
           />
           <input
             type="text"
             placeholder="Lastname"
-            className="border border-gray-400 py-1 px-2"
+            className="border border-gray-400 py-1 px-2 w-full"
             id="lastname"
             {...register('lastName', {
               required: true,
@@ -112,11 +112,11 @@ const BabyForm = ({ users, userLoading }) => {
           />
         </div>
         <div className="flex mt-5 border rounded-full overflow-hidden select-none ">
-          <div className=" px-2 py-1 bg-purple-500 text-white text-sm font-semibold mr-3">
+          <div className=" px-2 sm:py-1 py-2 bg-purple-500 text-white text-sm font-semibold mr-3">
             Gender
           </div>
-          <div className="flex mx-auto w-full justify-between">
-            <label className="flex radio cursor-pointer place-items-center">
+          <div className="sm:flex w-full items-center justify-center py-2 sm:py-0">
+            <label className="flex radio cursor-pointer justify-center">
               <input
                 className="transform scale-95"
                 type="radio"
@@ -124,9 +124,11 @@ const BabyForm = ({ users, userLoading }) => {
                 id="field-boy"
                 {...register('gender')}
               />
-              <div className="pl-1 pr-2 text-[0.8rem]">Boy</div>
+              <div className="pl-1 pr-2 text-[0.7rem] sm:text-[0.8rem]">
+                Boy
+              </div>
             </label>
-            <label className="flex radio cursor-pointer place-items-center">
+            <label className="flex radio cursor-pointer justify-center">
               <input
                 className="transform scale-95"
                 type="radio"
@@ -134,17 +136,9 @@ const BabyForm = ({ users, userLoading }) => {
                 id="field-girl"
                 {...register('gender')}
               />
-              <div className="pl-1 pr-2 text-[0.8rem]">Girl</div>
-            </label>
-            <label className="flex radio cursor-pointer place-items-center">
-              <input
-                className="transform scale-95"
-                type="radio"
-                value="neutral"
-                id="field-neutral"
-                {...register('gender')}
-              />
-              <div className="pl-1 pr-4 text-[0.8rem]">Neutral</div>
+              <div className="pl-1 pr-2 text-[0.7rem] sm:text-[0.8rem]">
+                Girl
+              </div>
             </label>
           </div>
         </div>
