@@ -196,9 +196,9 @@ const BabyInfo = ({ users }) => {
           />
         </Modal>
       )}
-      <div className="container flex-grow bg-white rounded-xl mx-auto shadow-lg px-2 sm:px-8 py-6 relative overflow-hidden">
-        <div className="bg-gradient-to-r from-pink-500 to-violet-500 h-[8rem] absolute w-full inset-0 ">
-          <div className="absolute top-[2rem] sm:right-[4rem] right-[1.5rem] text-white flex items-center gap-2">
+      <div className="container flex-grow h-[20rem] sm:h-full bg-white rounded-xl mx-auto shadow-lg px-2 sm:px-8 py-6 relative overflow-hidden">
+        <div className="bg-gradient-to-r from-pink-500 to-violet-500 h-[4rem] sm:h-[8rem] absolute w-full inset-0 ">
+          <div className="absolute top-[2rem] sm:right-[4rem] right-[1rem] text-white flex items-center gap-2">
             <span className="sm:text-2xl">Horoscope:</span>
             <span className="text-2xl sm:text-4xl">{horoscope.icon}</span>
           </div>
@@ -207,8 +207,8 @@ const BabyInfo = ({ users }) => {
             <span className="text-2xl sm:text-4xl">{chineseZodiac.icon}</span>
           </div>
         </div>
-        <div className="flex items-center pt-[8rem] justify-between relative sm:mr-6 ml-6 sm:ml-0 sm:gap-1 gap-4">
-          <div className="border-[6px] rounded-full absolute top-[3.5rem] sm:top-[1rem] left-[-1rem] sm:left-0 overflow-hidden w-[6rem] sm:w-[10rem] h-[6rem] sm:h-[10rem] border-white">
+        <div className="flex items-center pt-[4rem] sm:pt-[8rem] justify-between relative sm:mr-6 ml-6 sm:ml-0 sm:gap-1 gap-4">
+          <div className="border-[6px] rounded-full absolute top-[0.5rem] sm:top-[1rem] left-[-1rem] sm:left-0 overflow-hidden w-[5rem] sm:w-[10rem] h-[5rem] sm:h-[10rem] border-white">
             <Image
               src={profilepic}
               alt="profile pic"
@@ -245,7 +245,7 @@ const BabyInfo = ({ users }) => {
             </div>
           </div>
         </div>
-        <div className="flex gap-4 mt-8 items-center justify-center">
+        <div className="flex gap-4 mt-4 items-center justify-center">
           <button
             className="w-[6rem] border rounded bg-purple-500 py-2 text-center text-white"
             onClick={editBabyHandler}

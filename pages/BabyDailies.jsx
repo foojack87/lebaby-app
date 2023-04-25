@@ -78,7 +78,7 @@ const BabyDailies = ({ users, userLoading }) => {
         events={userEvents}
         userLoading={userLoading}
       />
-      <div className="flex flex-col text-[0.8rem] gap-2 px-4">
+      <div className="flex flex-col text-[0.8rem] gap-2 px-4 mt-4">
         <FullCalendar
           initialEvents={userEvents}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
