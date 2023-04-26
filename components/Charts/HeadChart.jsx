@@ -44,7 +44,13 @@ const HeadChart = ({ currentAge, gender, users, userLoading }) => {
   console.log(data, labels);
 
   // Logic for deleting data entries when clicking on a data point on the chart
-  const onClick = async (event) => {
+  const onClick = (event) => {
+    const { current: chart } = chartRef;
+    const element = getElementAtEvent(chart, event);
+    console.log(element);
+
+    if (element.length === 0) return;
+
     setChartHeadEvent(event);
     console.log(chartHeadEvent);
 

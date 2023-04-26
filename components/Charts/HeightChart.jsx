@@ -43,7 +43,13 @@ const HeightChart = ({ currentAge, gender, users, userLoading }) => {
 
   console.log(data, labels);
 
-  const onClick = async (event) => {
+  const onClick = (event) => {
+    const { current: chart } = chartRef;
+    const element = getElementAtEvent(chart, event);
+    console.log(element);
+
+    if (element.length === 0) return;
+
     setChartHeightEvent(event);
     console.log(chartHeightEvent);
 

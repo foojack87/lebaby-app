@@ -1,7 +1,9 @@
-import Hero from '@/components/Hero/Hero';
+import Hero from '@/components/Landing/Hero';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Summary from '@/components/Landing/Summary';
+import FeatureRecord from '@/components/Landing/FeatureRecord';
 
 export default function Home({ babies, users }) {
   const { user } = useUser();
@@ -16,8 +18,10 @@ export default function Home({ babies, users }) {
   });
 
   return (
-    <>
+    <div>
       <Hero />
-    </>
+      <Summary />
+      <FeatureRecord />
+    </div>
   );
 }

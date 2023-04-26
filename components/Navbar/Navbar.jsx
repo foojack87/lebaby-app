@@ -12,7 +12,7 @@ const NavBar = (props) => {
         <div
           className={`2xl:max-w-[1280px] w-full mx-auto flex justify-between sm:gap-8 items-center`}
         >
-          <div className="w-[168px] h-[48px] relative">
+          <div className="w-[12rem] h-[4rem] relative">
             <Image
               src="/lebaby-logo.png"
               alt="logo"

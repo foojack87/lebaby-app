@@ -68,9 +68,9 @@ const BabyInfo = ({ users }) => {
     // Convert to age in months and days
     const ageInMonths = Math.floor(ageInDays / 30);
     const ageInRemainingDays = Math.floor(ageInDays % 30);
-    age = ageInMonths === 1 ? '1 month' : ageInMonths + ' months';
+    age = ageInMonths === 1 ? '1M' : ageInMonths + ' M';
     if (ageInRemainingDays > 0 && ageInRemainingDays !== 1) {
-      age += ' ' + ageInRemainingDays + ' days';
+      age += ' ' + ageInRemainingDays + 'D';
     }
   }
 
@@ -207,7 +207,7 @@ const BabyInfo = ({ users }) => {
             <span className="text-2xl sm:text-4xl">{chineseZodiac.icon}</span>
           </div>
         </div>
-        <div className="flex items-center pt-[4rem] sm:pt-[8rem] justify-between relative sm:mr-6 ml-6 sm:ml-0 sm:gap-1 gap-4">
+        <div className="flex items-center pt-[4rem] sm:pt-[8rem] justify-evenly sm:justify-between relative ml-6 sm:ml-0 sm:gap-1 gap-4">
           <div className="border-[6px] rounded-full absolute top-[0.5rem] sm:top-[1rem] left-[-1rem] sm:left-0 overflow-hidden w-[5rem] sm:w-[10rem] h-[5rem] sm:h-[10rem] border-white">
             <Image
               src={profilepic}
@@ -224,28 +224,28 @@ const BabyInfo = ({ users }) => {
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
               <FaBirthdayCake className="sm:text-lg text-violet-500" />{' '}
-              <span className="text-sm sm:text-xl">{birthday}</span>
+              <span className="text-[0.75rem] sm:text-xl">{birthday}</span>
             </div>
 
             <div className="flex items-center gap-2">
               <TfiRuler className="sm:text-xl text-violet-500" />{' '}
-              <span className="text-sm sm:text-xl">{height}cm</span>
+              <span className="text-[0.75rem] sm:text-xl">{height}cm</span>
             </div>
             <div className="flex items-center gap-2">
               <GiWeightScale className="sm:text-xl text-violet-500" />{' '}
-              <span className="text-sm sm:text-xl">{weight}g</span>
+              <span className="text-[0.75rem] sm:text-xl">{weight}g</span>
             </div>
             <div className="flex items-center gap-2">
               <RxRulerHorizontal className="sm:text-xl text-violet-500" />
-              <span className="text-sm sm:text-xl">{head}cm</span>
+              <span className="text-[0.75rem] sm:text-xl">{head}cm</span>
             </div>
             <div className="flex items-center gap-2">
               <TbMoodBoy className="sm:text-xl text-violet-500" />
-              <span className="text-sm sm:text-xl">{age}</span>
+              <span className="text-[0.75rem] sm:text-xl">{age}</span>
             </div>
           </div>
         </div>
-        <div className="flex gap-4 mt-4 items-center justify-center">
+        <div className="flex gap-4 mt-8 sm:mt-4 items-center justify-center">
           <button
             className="w-[6rem] border rounded bg-purple-500 py-2 text-center text-white"
             onClick={editBabyHandler}

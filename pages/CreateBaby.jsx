@@ -10,7 +10,7 @@ const CreateBaby = ({ users, userLoading }) => {
   }
 
   return (
-    <div>
+    <div className="flex">
       <div className="w-full flex justify-center items-center">
         <div className="flex flex-col lg:flex-row w-10/12 lg:w-8/12 bg-white rounded-xl mx-auto shadow-lg overflow-hidden">
           <div className="w-full lg:w-1/2 lg:py-16 pt-8 px-12 flex flex-col items-center justify-center">
