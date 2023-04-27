@@ -84,6 +84,17 @@
   );
 }
 
+.gradient-06 {
+  position: absolute;
+  width: 200px;
+  height: 438px;
+  top: 0px;
+  left: 0px;
+
+  background: #7aebfb;
+  filter: blur(190px);
+}
+
 .feedback-gradient {
   position: absolute;
   width: 200px;
