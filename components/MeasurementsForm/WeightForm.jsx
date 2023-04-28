@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { ImSpinner3 } from 'react-icons/im';
 
@@ -157,6 +157,8 @@ const WeightForm = ({
     weightLabels === undefined ? [] : weightLabels
   );
   const [inputDisabled, setInputDisabled] = useState(false);
+  const weightRef = useRef(null);
+  const ageRef = useRef(null);
 
   // spinner
 
@@ -174,8 +176,8 @@ const WeightForm = ({
     event.preventDefault();
     setInputDisabled(true);
 
-    const weight = Number(event.target.weight.value);
-    const age = Number(event.target.age.value) + ' month';
+    const weight = Number(weightRef.current.value);
+    const age = Number(ageRef.current.value) + ' month';
     const babyGender = gender;
     const newData = { weight };
 
@@ -222,21 +224,24 @@ const WeightForm = ({
           <label htmlFor="weight" className="text-gray-600 font-medium mb-1">
             Weight:
             <input
+              required
               type="number"
               placeholder="grams"
               name="weight"
               id="weight"
+              ref={weightRef}
               className="ml-2 w-[6rem] border border-gray-400 rounded-md py-0.5 px-2 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
             />
           </label>
           <label htmlFor="age" className="text-gray-600 font-medium mb-1">
             Age:
             <input
+              required
               type="number"
               placeholder="months"
               name="age"
               id="age"
-              required
+              ref={ageRef}
               className="ml-2 w-[6rem] border border-gray-400 rounded-md py-0.5 px-2 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
             />
           </label>

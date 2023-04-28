@@ -1,10 +1,16 @@
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import BabyForm from '@/components/BabyForm/BabyForm';
 import { useRouter } from 'next/router';
+import { ImSpinner3 } from 'react-icons/im';
 
 const CreateBaby = ({ users, userLoading }) => {
   const router = useRouter();
-  if (userLoading) return <div>Loading...</div>;
+  if (userLoading)
+    return (
+      <div className="w-full flex justify-center items-center">
+        <ImSpinner3 className="animate-spin text-6xl text-pink-500" />
+      </div>
+    );
   if (users.baby) {
     router.push('/BabyProfile');
   }

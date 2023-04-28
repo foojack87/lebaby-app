@@ -39,11 +39,6 @@ const FeatureRecord = (props) => {
             </div>
           </div>
           <div className="basis-1/2 relative mx-auto flex flex-col sm:flex-row gap-8">
-            {/* <img
-              src="/activity.png"
-              alt="record activity"
-              className="rounded-lg hidden sm:block sm:absolute top-[8rem] left-[2rem] shadow-xl mb-6 sm:mb-0"
-            /> */}
             <img
               src="/activity-mobile.png"
               alt="record activity mobile view"

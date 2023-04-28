@@ -156,7 +156,7 @@ const ActivityForm = ({ users, events, userLoading }) => {
       </label>
       <input
         required
-        className="border w-[8rem] border-gray-400 rounded-md py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
+        className={`border w-[8rem] border-gray-400 rounded-md py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue`}
         placeholder="ie. 150mL"
         type="number"
         id="pumped"
@@ -168,7 +168,6 @@ const ActivityForm = ({ users, events, userLoading }) => {
 
   const onSubmitActivity = async (e) => {
     e.preventDefault();
-    setInputDisabled(true);
 
     let newEvent = '';
 

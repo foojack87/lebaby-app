@@ -15,7 +15,11 @@ const EditBaby = ({
 }) => {
   const [inputDisabled, setInputDisabled] = useState(false);
 
-  const { register, handleSubmit, setValue } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm({
     defaultValues: {
       firstName,
       lastName,
@@ -76,7 +80,9 @@ const EditBaby = ({
                 First Name
               </label>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline "
+                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline  ${
+                  errors.firstName ? 'border-red-500' : 'border-gray-400'
+                }`}
                 type="text"
                 id="firstName"
                 name="firstName"
@@ -94,7 +100,9 @@ const EditBaby = ({
                 Last Name
               </label>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline "
+                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline  ${
+                  errors.lastName ? 'border-red-500' : 'border-gray-400'
+                }`}
                 type="text"
                 id="lastName"
                 name="lastName"
@@ -113,11 +121,13 @@ const EditBaby = ({
                 Birthday
               </label>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline "
+                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  errors.birthday ? 'border-red-500' : 'border-gray-400'
+                } `}
                 type="date"
                 id="birthday"
                 name="birthday"
-                {...register('birthday')}
+                {...register('birthday', { required: true })}
               />
             </div>
           </div>
@@ -131,7 +141,9 @@ const EditBaby = ({
                 Height
               </label>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline "
+                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline  ${
+                  errors.height ? 'border-red-500' : 'border-gray-400'
+                }`}
                 type="number"
                 id="height"
                 name="height"
@@ -151,7 +163,9 @@ const EditBaby = ({
                 Weight
               </label>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline "
+                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline   ${
+                  errors.weight ? 'border-red-500' : 'border-gray-400'
+                }`}
                 type="number"
                 id="weight"
                 name="weight"
@@ -171,7 +185,9 @@ const EditBaby = ({
                 Head
               </label>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline "
+                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline   ${
+                  errors.head ? 'border-red-500' : 'border-gray-400'
+                }`}
                 type="number"
                 id="head"
                 name="head"
@@ -184,7 +200,11 @@ const EditBaby = ({
             </div>
           </div>
         </div>
-        <div className="flex mt-5 border rounded-full overflow-hidden select-none w-full mx-auto">
+        <div
+          className={`flex mt-5 border rounded-full overflow-hidden select-none w-full mx-auto ${
+            errors.gender && 'border-red-500'
+          }`}
+        >
           <div className=" px-2 py-1 bg-purple-500 text-white text-sm font-semibold mr-3">
             Gender
           </div>
