@@ -5,6 +5,9 @@ import { useRouter } from 'next/router';
 import Summary from '@/components/Landing/Summary';
 import FeatureRecord from '@/components/Landing/FeatureRecord';
 import FeatureDailyTotals from '@/components/Landing/FeatureDailyTotals';
+import FeatureCalendar from '@/components/Landing/FeatureCalendar';
+import FeatureGrowth from '@/components/Landing/FeatureGrowth';
+import CallToAction from '@/components/Landing/CallToAction';
 
 export default function Home({ babies, users }) {
   const { user } = useUser();
@@ -24,6 +27,9 @@ export default function Home({ babies, users }) {
       <Summary />
       <FeatureRecord />
       <FeatureDailyTotals />
+      <FeatureCalendar />
+      <FeatureGrowth />
+      <CallToAction />
     </div>
   );
 }

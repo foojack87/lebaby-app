@@ -6,7 +6,8 @@ import { useUser } from '@auth0/nextjs-auth0/client';
 const Layout = ({ children, users, userLoading }) => {
   const { user, error, isLoading } = useUser();
 
-  if (isLoading) return <div>loading...</div>;
+  if (isLoading)
+    return <div className="bg-black opacity-10 h-screen w-screen" />;
 
   return (
     <>
