@@ -10,7 +10,6 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
 import WeightChart from '@/components/Charts/WeightChart';
 import HeightChart from '@/components/Charts/HeightChart';
 import HeadChart from '@/components/Charts/HeadChart';
@@ -61,8 +60,8 @@ const GrowthChart = ({ users, userLoading }) => {
     setMeasurement('head');
   };
 
-  // getting users baby gender and birthday
-  const { gender, birthday } = users.baby;
+  const { firstName, lastName, height, weight, head, gender, birthday } =
+    users.baby;
 
   // Logic for getting current age of baby
   const birthDate = new Date(birthday);
