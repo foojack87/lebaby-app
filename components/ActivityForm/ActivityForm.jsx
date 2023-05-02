@@ -15,6 +15,8 @@ const ActivityForm = ({ users, events, userLoading }) => {
 
   const router = useRouter();
 
+  // Loading spinner
+
   if (userLoading) return <div>Loading...</div>;
 
   const spinner = inputDisabled && (
@@ -22,6 +24,8 @@ const ActivityForm = ({ users, events, userLoading }) => {
       <ImSpinner3 className="animate-spin" />
     </div>
   );
+
+  // Getting form input data and setting activity state
 
   const titleChangeHandler = (e) => {
     setTitle(e.target.value);
@@ -62,6 +66,9 @@ const ActivityForm = ({ users, events, userLoading }) => {
     setActivityType('breastPump');
     setTitle('');
   };
+
+  // Rendered different elements
+
   const bottleFeed = (
     <div className="flex flex-col">
       <label htmlFor="bottled" className="text-gray-600 font-medium mb-1">
@@ -160,11 +167,14 @@ const ActivityForm = ({ users, events, userLoading }) => {
     </div>
   );
 
+  // Form submit
+
   const onSubmitActivity = async (e) => {
     e.preventDefault();
 
     let newEvent = '';
 
+    // find out what the activity state is
     if (activityType === 'bottleFeed') {
       newEvent = [
         ...event,
@@ -180,6 +190,8 @@ const ActivityForm = ({ users, events, userLoading }) => {
     }
 
     setEvent(newEvent);
+
+    // Post form data to database
 
     const response = await fetch('/api/user', {
       method: 'PUT',

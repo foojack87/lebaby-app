@@ -13,6 +13,7 @@ export default function Home({ babies, users }) {
   const { user } = useUser();
   const router = useRouter();
 
+  // check to see if user is logged in or not.
   useEffect(() => {
     if (user) {
       router.push('/BabyProfile');

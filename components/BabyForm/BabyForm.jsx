@@ -20,6 +20,8 @@ const BabyForm = ({ users, userLoading }) => {
     },
   });
 
+  // Form submit to database
+
   const onSubmitBaby = async (data) => {
     setInputDisabled(true);
     const baby = {

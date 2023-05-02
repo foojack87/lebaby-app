@@ -11,6 +11,8 @@ const CreateBaby = ({ users, userLoading }) => {
         <ImSpinner3 className="animate-spin text-6xl text-pink-500" />
       </div>
     );
+
+  // check is user already has a baby or not
   if (users.baby) {
     router.push('/BabyProfile');
   }

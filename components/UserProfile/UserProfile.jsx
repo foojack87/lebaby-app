@@ -14,8 +14,6 @@ const UserProfile = ({ toggle }) => {
     );
   if (error) return <div>error</div>;
 
-  // refactor nested ternary operator
-
   const username = user.baby?.firstName ? user.baby.firstName : user.nickname;
 
   return (

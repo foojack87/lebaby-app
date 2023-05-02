@@ -136,10 +136,6 @@ function calculateWeightPercentile(weightGrams, ageMonths, gender) {
   return percentile;
 }
 
-const age = 1;
-const gender = 'boy';
-const weight = 4800;
-
 calculateWeightPercentile(weight, age, gender);
 
 const WeightForm = ({

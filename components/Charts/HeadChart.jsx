@@ -55,6 +55,8 @@ const HeadChart = ({ currentAge, gender, users, userLoading }) => {
     setIsModalOpen(true);
   };
 
+  // Sending data to database
+
   const confirmHandler = async (props) => {
     setInputDisabled(false);
     const { current: chart } = chartRef;

@@ -149,11 +149,6 @@ function calculateLengthZScoreAndPercentile(ageMonths, lengthCm, gender) {
   return percentile;
 }
 
-const ageMonths = 1;
-const lengthCm = 54;
-const gender = 'boy';
-const result = calculateLengthZScoreAndPercentile(ageMonths, lengthCm, gender);
-
 const HeightForm = ({
   heightData,
   heightLabels,

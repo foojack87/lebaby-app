@@ -27,8 +27,10 @@ const BabyDailies = ({ users, userLoading }) => {
 
   if (!users.baby) return <NoBaby />;
 
+  // getting the babies activities
   const userEvents = users.activity === undefined ? '' : users.activity;
 
+  // delete handler to delete activities
   const handleEventClick = async (clickInfo) => {
     const id = +clickInfo.event.id;
     setTitle('Delete Activity');

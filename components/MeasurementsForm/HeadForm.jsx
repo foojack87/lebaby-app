@@ -149,11 +149,6 @@ function calculateHeadZScoreAndPercentile(ageMonths, headCm, gender) {
   return percentile;
 }
 
-const ageMonths = 1;
-const headCm = 38;
-const gender = 'boy';
-const result = calculateHeadZScoreAndPercentile(ageMonths, headCm, gender);
-
 const HeadForm = ({ headData, headLabels, gender, users, userLoading }) => {
   const [data, setData] = useState(headData === undefined ? [] : headData);
   const [labels, setLabels] = useState(

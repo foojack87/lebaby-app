@@ -60,8 +60,9 @@ const GrowthChart = ({ users, userLoading }) => {
   const headMeasurement = () => {
     setMeasurement('head');
   };
-  const { firstName, lastName, height, weight, head, gender, birthday } =
-    users.baby;
+
+  // getting users baby gender and birthday
+  const { gender, birthday } = users.baby;
 
   // Logic for getting current age of baby
   const birthDate = new Date(birthday);

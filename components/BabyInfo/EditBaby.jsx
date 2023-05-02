@@ -18,7 +18,7 @@ const EditBaby = ({
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm({
     defaultValues: {
       firstName,
