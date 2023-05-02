@@ -41,20 +41,15 @@ const WeightChart = ({ currentAge, gender, users, userLoading }) => {
   const data = users.weightData;
   const labels = users.weightLabels;
 
-  console.log(users.weightData);
-  console.log(users.weightLabels);
-
   // Logic for deleting data entries when clicking on a data point on the chart
 
   const onClick = (event) => {
     const { current: chart } = chartRef;
     const element = getElementAtEvent(chart, event);
-    console.log(element);
 
     if (element.length === 0) return;
 
     setChartWeightEvent(event);
-    console.log(chartWeightEvent);
 
     setTitle('Delete Activity');
     setMessage(`Press 'Confirm' to delete`);
@@ -69,10 +64,8 @@ const WeightChart = ({ currentAge, gender, users, userLoading }) => {
     if (element.length) {
       const { datasetIndex, index } = element[0];
 
-      console.log(data[index]);
       const newData = data.filter((_, i) => i !== index);
       const newLabels = labels.filter((_, i) => i !== index);
-      console.log(newData, newLabels);
 
       const response = await fetch('/api/baby', {
         method: 'PUT',
@@ -87,7 +80,7 @@ const WeightChart = ({ currentAge, gender, users, userLoading }) => {
       });
 
       const responseJson = await response.json();
-      console.log(responseJson);
+
       setIsModalOpen(false);
       setInputDisabled(true);
       router.reload();

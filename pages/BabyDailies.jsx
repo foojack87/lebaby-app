@@ -28,11 +28,9 @@ const BabyDailies = ({ users, userLoading }) => {
   if (!users.baby) return <NoBaby />;
 
   const userEvents = users.activity === undefined ? '' : users.activity;
-  console.log(userEvents);
 
   const handleEventClick = async (clickInfo) => {
     const id = +clickInfo.event.id;
-    console.log(activityId);
     setTitle('Delete Activity');
     setMessage(`Press 'Confirm' to delete`);
     setActivityId(id);
@@ -52,7 +50,6 @@ const BabyDailies = ({ users, userLoading }) => {
       }),
     });
     const reponseJson = await response.json();
-    console.log(reponseJson);
 
     setInputDisabled(true);
     setIsModalOpen(false);

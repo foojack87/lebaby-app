@@ -41,17 +41,13 @@ const HeightChart = ({ currentAge, gender, users, userLoading }) => {
   const data = users.heightData;
   const labels = users.heightLabels;
 
-  console.log(data, labels);
-
   const onClick = (event) => {
     const { current: chart } = chartRef;
     const element = getElementAtEvent(chart, event);
-    console.log(element);
 
     if (element.length === 0) return;
 
     setChartHeightEvent(event);
-    console.log(chartHeightEvent);
 
     setTitle('Delete Activity');
     setMessage(`Press 'Confirm' to delete`);
@@ -66,10 +62,8 @@ const HeightChart = ({ currentAge, gender, users, userLoading }) => {
     if (element.length) {
       const { datasetIndex, index } = element[0];
 
-      console.log(data[index]);
       const newData = data.filter((_, i) => i !== index);
       const newLabels = labels.filter((_, i) => i !== index);
-      console.log(newData, newLabels);
 
       const response = await fetch('/api/baby', {
         method: 'PUT',
@@ -84,7 +78,7 @@ const HeightChart = ({ currentAge, gender, users, userLoading }) => {
       });
 
       const responseJson = await response.json();
-      console.log(responseJson);
+
       setIsModalOpen(false);
       setInputDisabled(true);
       router.reload();

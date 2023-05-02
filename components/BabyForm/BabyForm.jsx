@@ -36,7 +36,6 @@ const BabyForm = ({ users, userLoading }) => {
     });
 
     const responseJson = await response.json();
-    console.log(responseJson);
 
     setInputDisabled(false);
     window.location.href = '/BabyProfile';

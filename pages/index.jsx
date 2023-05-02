@@ -13,8 +13,6 @@ export default function Home({ babies, users }) {
   const { user } = useUser();
   const router = useRouter();
 
-  console.log(users);
-
   useEffect(() => {
     if (user) {
       router.push('/BabyProfile');

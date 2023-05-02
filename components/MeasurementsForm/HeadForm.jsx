@@ -153,7 +153,6 @@ const ageMonths = 1;
 const headCm = 38;
 const gender = 'boy';
 const result = calculateHeadZScoreAndPercentile(ageMonths, headCm, gender);
-console.log(result);
 
 const HeadForm = ({ headData, headLabels, gender, users, userLoading }) => {
   const [data, setData] = useState(headData === undefined ? [] : headData);
@@ -177,8 +176,6 @@ const HeadForm = ({ headData, headLabels, gender, users, userLoading }) => {
     event.preventDefault();
     setInputDisabled(true);
 
-    console.log(event.target.age);
-
     const head = Number(event.target.head.value);
     const age = Number(event.target.age.value) + ' month';
     const babyGender = gender;
@@ -196,8 +193,6 @@ const HeadForm = ({ headData, headLabels, gender, users, userLoading }) => {
     setData(newMeasurementData);
     setLabels(newLabel);
 
-    console.log(data, labels);
-
     const response = await fetch('/api/baby', {
       method: 'PUT',
       headers: {
@@ -211,7 +206,6 @@ const HeadForm = ({ headData, headLabels, gender, users, userLoading }) => {
     });
 
     const responseJson = response.json();
-    console.log(responseJson);
 
     setInputDisabled(false);
     router.reload();

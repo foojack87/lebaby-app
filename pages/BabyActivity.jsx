@@ -30,15 +30,11 @@ const BabyActivity = ({ users, userLoading }) => {
 
   // to get activity data to be displayable in the calendar
   const userEvents = users.activity === undefined ? '' : users.activity;
-  console.log(userEvents);
-  // const displayEvents = userEvents?.length > 1 ? userEvents : userEvents;
-  // console.log(displayEvents);
 
   // handler for deleting an event
 
   const handleEventClick = async (clickInfo) => {
     const id = +clickInfo.event.id;
-    console.log(activityId);
     setTitle('Delete Activity');
     setMessage(`Press 'Confirm' to delete`);
     setActivityId(id);
@@ -58,7 +54,6 @@ const BabyActivity = ({ users, userLoading }) => {
       }),
     });
     const reponseJson = await response.json();
-    console.log(reponseJson);
 
     setInputDisabled(true);
     setIsModalOpen(false);

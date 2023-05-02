@@ -5,7 +5,6 @@ import { ImSpinner3 } from 'react-icons/im';
 
 const UserProfile = ({ toggle }) => {
   const { user, error, userLoading } = useUserData();
-  console.log(user);
 
   if (userLoading)
     return (

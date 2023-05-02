@@ -55,14 +55,14 @@ const BabyInfo = ({ users }) => {
 
   if (ageInDays < 7) {
     // Convert to age in days
-    age = Math.floor(ageInDays) + ' days old';
+    age = Math.floor(ageInDays) + 'D';
   } else if (ageInDays < 30) {
     // Convert to age in weeks and days
     const ageInWeeks = Math.floor(ageInDays / 7);
     const ageInRemainingDays = Math.floor(ageInDays % 7);
-    age = ageInWeeks === 1 ? '1 week' : ageInWeeks + ' weeks';
+    age = ageInWeeks === 1 ? '1W' : ageInWeeks + 'W';
     if (ageInRemainingDays > 0) {
-      age += ' and ' + ageInRemainingDays + ' days old';
+      age += ' ' + ageInRemainingDays + 'D';
     }
   } else {
     // Convert to age in months and days
@@ -93,8 +93,6 @@ const BabyInfo = ({ users }) => {
 
   const chineseZodiacIndex = (year - 1900) % 12;
   const chineseZodiac = chineseZodiacs[chineseZodiacIndex];
-
-  console.log(`Your Chinese zodiac sign is ${chineseZodiac.name}`);
 
   // logic for finding babies horoscope
 
@@ -166,8 +164,6 @@ const BabyInfo = ({ users }) => {
       (month === sign.range.startMonth && day >= sign.range.startDay) ||
       (month === sign.range.endMonth && day <= sign.range.endDay)
   );
-
-  console.log(`Your horoscope is ${horoscope.name}`);
 
   const editBabyHandler = (props) => {
     setModalOpened(true);

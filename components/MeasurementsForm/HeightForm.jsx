@@ -153,7 +153,6 @@ const ageMonths = 1;
 const lengthCm = 54;
 const gender = 'boy';
 const result = calculateLengthZScoreAndPercentile(ageMonths, lengthCm, gender);
-console.log(result);
 
 const HeightForm = ({
   heightData,
@@ -201,8 +200,6 @@ const HeightForm = ({
     setData(newMeasurementData);
     setLabels(newLabel);
 
-    console.log(data, labels);
-
     const response = await fetch('/api/baby', {
       method: 'PUT',
       headers: {
@@ -216,7 +213,6 @@ const HeightForm = ({
     });
 
     const responseJson = response.json();
-    console.log(responseJson);
 
     setInputDisabled(false);
     router.reload();

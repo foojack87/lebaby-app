@@ -124,8 +124,6 @@ function calculateWeightPercentile(weightGrams, ageMonths, gender) {
   const S = closestMonth.S;
   const zScore = ((weightKg / M) ** L - 1) / (S * L);
 
-  console.log(zScore);
-
   // Lookup percentile from table
   let percentile = null;
   for (let i = 0; i < zScoreTable.length; i++) {
@@ -193,8 +191,6 @@ const WeightForm = ({
     setData(newMeasurementData);
     setLabels(newLabel);
 
-    console.log(data, labels);
-
     const response = await fetch('/api/baby', {
       method: 'PUT',
       headers: {
@@ -208,7 +204,6 @@ const WeightForm = ({
     });
 
     const responseJson = response.json();
-    console.log(responseJson);
 
     setInputDisabled(false);
     router.reload();

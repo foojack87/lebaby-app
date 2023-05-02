@@ -4,7 +4,6 @@ const DailyTotals = ({ users }) => {
   const data = users.activity;
   const today = new Date(); // get the current date
   const todayISO = new Date().toISOString().substring(0, 10); // get today's date in ISO format
-  console.log(todayISO);
 
   // logic for pump data
 
@@ -13,7 +12,6 @@ const DailyTotals = ({ users }) => {
       item.title.includes('Pumped') &&
       new Date(item.start).toDateString() === today.toDateString()
   );
-  console.log(pumpsToday);
 
   let totalPumpedMl = 0;
   for (let i = 0; i < pumpsToday?.length; i++) {
@@ -37,9 +35,6 @@ const DailyTotals = ({ users }) => {
     totalBottleFedMl += bottleMl;
   }
 
-  console.log(totalBottleFedMl);
-  console.log(bottleToday);
-
   // logic for total times fed
 
   const fed = data?.filter(
@@ -47,8 +42,6 @@ const DailyTotals = ({ users }) => {
       item.title.includes('fed') &&
       new Date(item.start).toDateString() === today.toDateString()
   );
-
-  console.log(fed);
 
   // logic for total nap time today
 
@@ -58,8 +51,6 @@ const DailyTotals = ({ users }) => {
       new Date(item.start).toDateString() === today.toDateString()
   );
 
-  console.log(napsToday);
-
   let totalNapMinutes = 0;
 
   napsToday?.forEach((nap) => {
@@ -68,8 +59,6 @@ const DailyTotals = ({ users }) => {
     totalNapMinutes += napDurationMinutes;
   });
 
-  console.log(totalNapMinutes);
-
   // filter the data array to get only the items with the "poop" title that occurred on the current date
   const poopsToday = data?.filter(
     (item) =>
@@ -77,16 +66,12 @@ const DailyTotals = ({ users }) => {
       new Date(item.start).toDateString() === today.toDateString()
   );
 
-  console.log(`Number of poops today: ${poopsToday?.length}`);
-
   // Logic for calculating amount of times peed today
   const peesToday = data?.filter(
     (item) =>
       item.title.toLowerCase() === 'pee' &&
       new Date(item.start).toDateString() === today.toDateString()
   );
-
-  console.log(peesToday);
 
   return (
     <>

@@ -36,37 +36,31 @@ const ActivityForm = ({ users, events, userLoading }) => {
   const changeBreastFeed = (props) => {
     setActivityType('breastFeed');
     setTitle('Breast fed');
-    console.log(activityType);
   };
 
   const changeBottleFeed = (props) => {
     setActivityType('bottleFeed');
     setTitle('');
-    console.log(activityType);
   };
 
   const changeNap = (props) => {
     setActivityType('nap');
     setTitle('Nap');
-    console.log(activityType);
   };
 
   const changePoop = (props) => {
     setActivityType('poop');
     setTitle('Poop');
-    console.log(activityType);
   };
 
   const changePee = (props) => {
     setActivityType('pee');
     setTitle('Pee');
-    console.log(activityType);
   };
 
   const changeBreastPump = (props) => {
     setActivityType('breastPump');
     setTitle('');
-    console.log(activityType);
   };
   const bottleFeed = (
     <div className="flex flex-col">
@@ -187,8 +181,6 @@ const ActivityForm = ({ users, events, userLoading }) => {
 
     setEvent(newEvent);
 
-    console.log(event);
-
     const response = await fetch('/api/user', {
       method: 'PUT',
       headers: {
@@ -201,7 +193,6 @@ const ActivityForm = ({ users, events, userLoading }) => {
     });
 
     const responseJson = response.json();
-    console.log(responseJson);
 
     setInputDisabled(false);
     router.reload();

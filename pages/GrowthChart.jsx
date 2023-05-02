@@ -83,8 +83,6 @@ const GrowthChart = ({ users, userLoading }) => {
     age = ageInMonths === 1 ? '1 month' : ageInMonths + ' months';
   }
 
-  console.log('Current Age: ' + age);
-
   return (
     <>
       <div className="px-6 mb-6 flex place-self-center justify-center ">

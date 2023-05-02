@@ -4,8 +4,6 @@ import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { ImSpinner3 } from 'react-icons/im';
 
 const BabyProfile = ({ users, userLoading }) => {
-  console.log(users);
-
   // check if still fetching user data
   if (userLoading)
     return (

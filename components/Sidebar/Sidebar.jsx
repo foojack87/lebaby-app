@@ -10,8 +10,6 @@ const Sidebar = ({ users }) => {
 
   const toggleHandler = () => {
     setToggle(!toggle);
-    console.log(users);
-    console.log(baby);
   };
 
   return (
