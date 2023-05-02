@@ -18,18 +18,18 @@ const FeatureRecord = (props) => {
               </span>
             </h2>
             <div className="mt-6 bg-white bg-opacity-55 shadow-md -skew-x-12 rounded py-2 px-4">
-              <ul className="mt-[8px] font-normal sm:text-[18px] lg:text-[24px] text-[16px] text-gray-500 flex skew-x-12 flex-col gap-4">
-                <li className="flex items-center ml-9 gap-2">
+              <ul className="font-normal sm:text-[18px] lg:text-[24px] text-[16px] text-gray-500 flex flex-col gap-4">
+                <li className="flex items-center gap-2 skew-x-12 ">
                   <TbCircleNumber1 className="sm:text-4xl text-3xl text-violet-500 opacity-80 w-[4rem]" />
-                  <span className="font-bold text-lg">Select an activity</span>
+                  <span className="font-bold text-lg ">Select an activity</span>
                 </li>
-                <li className="flex items-center ml-5 gap-2">
+                <li className="flex items-center gap-2 skew-x-12 ">
                   <TbCircleNumber2 className="sm:text-4xl text-3xl text-violet-500 opacity-80 w-[4rem]" />
                   <span className="font-bold text-lg">
                     Input activity details
                   </span>
                 </li>
-                <li className="flex items-center gap-2">
+                <li className="flex items-center gap-2 skew-x-12 ">
                   <TbCircleNumber3 className="sm:text-4xl text-3xl text-violet-500 opacity-80 w-[4rem]" />
                   <span className="font-bold text-lg">
                     Visualize on a scheduler
