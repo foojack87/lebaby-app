@@ -59,9 +59,7 @@ const GrowthChart = ({ users, userLoading }) => {
   const headMeasurement = () => {
     setMeasurement('head');
   };
-
-  const { firstName, lastName, height, weight, head, gender, birthday } =
-    users.baby;
+  const { gender, birthday } = users.baby;
 
   // Logic for getting current age of baby
   const birthDate = new Date(birthday);
@@ -82,6 +80,8 @@ const GrowthChart = ({ users, userLoading }) => {
     const ageInMonths = Math.floor(ageInDays / 30);
     age = ageInMonths === 1 ? '1 month' : ageInMonths + ' months';
   }
+
+  console.log('Current Age: ' + age);
 
   return (
     <>
