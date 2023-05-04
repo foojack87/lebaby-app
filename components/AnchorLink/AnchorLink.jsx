@@ -12,10 +12,10 @@ function AnchorLink({ children, href, className }) {
     </div>
   );
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    router.push(href);
+    await router.push(href);
     setIsLoading(false);
   };
 
