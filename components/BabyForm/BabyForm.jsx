@@ -146,10 +146,10 @@ const BabyForm = ({ users }) => {
             errors.gender && 'border-red-500'
           }`}
         >
-          <div className=" px-2 sm:py-1 py-2 bg-purple-500 text-white text-sm font-semibold mr-3">
-            Gender
+          <div className="flex justify-center items-center px-2 sm:py-1 bg-purple-500 text-white text-sm font-semibold">
+            <p>Gender</p>
           </div>
-          <div className="sm:flex w-full items-center justify-center py-2 sm:py-0">
+          <div className="flex flex-col sm:flex-row w-full items-center justify-center py-1 sm:py-0">
             <label className="flex radio cursor-pointer justify-center">
               <input
                 className="transform scale-95"
