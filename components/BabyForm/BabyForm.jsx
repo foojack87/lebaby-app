@@ -11,6 +11,9 @@ const BabyForm = ({ users }) => {
     </div>
   );
 
+  const today = new Date();
+  const formattedDate = today.toISOString().slice(0, 10);
+
   const {
     register,
     handleSubmit,
@@ -23,7 +26,7 @@ const BabyForm = ({ users }) => {
       height: '',
       weight: '',
       head: '',
-      birthday: new Date(Date.now()).toJSON(),
+      birthday: formattedDate,
     },
   });
 
@@ -125,6 +128,7 @@ const BabyForm = ({ users }) => {
           />
         </div>
         <div className="mt-5">
+          <label htmlFor="bday">Date of Birth:</label>
           <input
             type="date"
             placeholder="Birth Date (MM/DD/YYYY)"
