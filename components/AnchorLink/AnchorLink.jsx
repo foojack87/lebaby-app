@@ -14,8 +14,9 @@ function AnchorLink({ children, href, className }) {
 
   const handleClick = (e) => {
     e.preventDefault();
-    router.push(href);
     setIsLoading(true);
+    router.push(href);
+    setIsLoading(false);
   };
 
   return (
