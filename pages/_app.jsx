@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
+import { Analytics } from '@vercel/analytics/react';
 import Layout from '@/components/Layout/Layout';
 import '@/styles/globals.css';
 import useUserData from '@/utils/useUserData';
@@ -27,6 +28,7 @@ export default function App(props) {
           />
         </Layout>
       </UserProvider>
+      <Analytics />
     </>
   );
 }
