@@ -12,12 +12,15 @@ function AnchorLink({ children, href, className }) {
     </div>
   );
 
-  const handleClick = async (e) => {
+  const handleClick = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    await router.push(href);
-    setIsLoading(false);
+    router.push(href);
   };
+
+  router.events.on('routeChangeComplete', () => {
+    setIsLoading(false);
+  });
 
   return (
     <a
