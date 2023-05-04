@@ -22,6 +22,10 @@ function AnchorLink({ children, href, className }) {
     setIsLoading(false);
   });
 
+  window.onbeforeunload = () => {
+    setIsLoading(false);
+  };
+
   return (
     <a
       href={href}
