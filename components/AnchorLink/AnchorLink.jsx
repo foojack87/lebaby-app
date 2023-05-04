@@ -26,6 +26,14 @@ function AnchorLink({ children, href, className }) {
     setIsLoading(false);
   };
 
+  const handlePageHide = () => {
+    setIsLoading(false);
+  };
+
+  if (typeof window !== 'undefined') {
+    window.addEventListener('pagehide', handlePageHide);
+  }
+
   return (
     <a
       href={href}
