@@ -36,7 +36,7 @@ const CallToAction = (props) => {
             <div>
               <AnchorLink
                 href="/BabyProfile"
-                className="bg-[#a509ff] sm:px-10 px-6 py-4 text-lg sm:text-xl"
+                className="bg-[#a509ff] sm:px-10 px-6 py-4 text-lg sm:text-xl w-[14rem] h-[4rem] mx-auto"
               >
                 Start Now
               </AnchorLink>
