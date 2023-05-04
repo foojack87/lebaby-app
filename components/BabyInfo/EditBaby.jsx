@@ -12,8 +12,11 @@ const EditBaby = ({
   gender,
   birthday,
   closeModal,
+  picture,
 }) => {
   const [inputDisabled, setInputDisabled] = useState(false);
+
+  console.log(picture);
 
   const {
     register,
@@ -28,12 +31,13 @@ const EditBaby = ({
       head,
       birthday,
       gender,
+      picture,
     },
   });
 
   // spinner for loading state
 
-  const spinner = inputDisabled && (
+  const spinner = (
     <div className="w-[100%] h-[100%] flex items-center justify-center text-xl text-white">
       <ImSpinner3 className="animate-spin" />
     </div>
@@ -199,6 +203,25 @@ const EditBaby = ({
             </div>
           </div>
         </div>
+
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 font-bold mb-2"
+            htmlFor="picture"
+          >
+            Profile Photo
+          </label>
+          <input
+            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline   ${
+              errors.picture ? 'border-red-500' : 'border-gray-400'
+            }`}
+            id="picture"
+            name="picture"
+            {...register('picture', {
+              required: true,
+            })}
+          />
+        </div>
         <div
           className={`flex mt-5 border rounded-full overflow-hidden select-none w-full mx-auto ${
             errors.gender && 'border-red-500'
@@ -235,6 +258,7 @@ const EditBaby = ({
           <button
             className="w-[6rem] h-[3rem] border rounded bg-purple-500 py-2 text-center text-white"
             onClick={closeModal}
+            disabled={inputDisabled}
           >
             Close
           </button>

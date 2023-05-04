@@ -16,6 +16,8 @@ const UserProfile = ({ toggle }) => {
 
   const username = user.baby?.firstName ? user.baby.firstName : user.nickname;
 
+  const picture = user.baby?.picture ? user.baby?.picture : user.picture;
+
   return (
     <div
       className={`flex gap-3 items-center ${
@@ -25,8 +27,8 @@ const UserProfile = ({ toggle }) => {
       }}`}
     >
       <div className="min-w-[3.5rem] h-[3.5rem] p-1">
-        <Image
-          src={profilepic}
+        <img
+          src={picture}
           alt="profile picture"
           className="w-full h-full rounded-full object-cover"
         />

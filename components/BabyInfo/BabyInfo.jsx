@@ -2,9 +2,8 @@ import profilepic from '../../public/babypic.jpg';
 import Image from 'next/image';
 import Modal from '../Modal/Modal';
 import EditBaby from './EditBaby';
-import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-import { BsGenderFemale, BsGenderMale } from 'react-icons/bs';
+import { BsGenderFemale, BsGenderMale, BsPencilSquare } from 'react-icons/bs';
 import {
   GiPisces,
   GiAquarius,
@@ -42,6 +41,8 @@ const BabyInfo = ({ users }) => {
 
   const { firstName, lastName, height, weight, head, gender, birthday } =
     users.baby;
+
+  const picture = users.baby.picture ? users.baby.picture : users.picture;
 
   // Logic for getting current age of baby
   const birthDate = new Date(birthday);
@@ -189,6 +190,7 @@ const BabyInfo = ({ users }) => {
             birthday={birthday}
             users={users}
             closeModal={closeModalHandler}
+            picture={picture}
           />
         </Modal>
       )}
@@ -204,13 +206,14 @@ const BabyInfo = ({ users }) => {
           </div>
         </div>
         <div className="flex items-center pt-[4rem] sm:pt-[8rem] justify-evenly sm:justify-between relative ml-6 sm:ml-0 sm:gap-1 gap-4">
-          <div className="border-[6px] rounded-full absolute top-[0.5rem] sm:top-[1rem] left-[-1rem] sm:left-0 overflow-hidden w-[5rem] sm:w-[10rem] h-[5rem] sm:h-[10rem] border-white">
-            <Image
-              src={profilepic}
+          <div className="border-[6px] rounded-full absolute top-[0.5rem] sm:top-[1rem] left-[-1rem] overflow-hidden sm:left-0 w-[5rem] sm:w-[10rem] h-[5rem] sm:h-[10rem] border-white">
+            <img
+              src={picture}
               alt="profile pic"
-              className="w-full h-full"
+              className="relative w-full h-full"
             />
           </div>
+
           <div className="flex-col flex sm:flex-row items-center mt-12 sm:ml-4 gap-2">
             <span className="sm:text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 font-bold">
               {firstName} {lastName}

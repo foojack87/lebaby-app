@@ -1,8 +1,15 @@
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import { ImSpinner3 } from 'react-icons/im';
 
-const BabyForm = ({ users, userLoading }) => {
+const BabyForm = ({ users }) => {
   const [inputDisabled, setInputDisabled] = useState(false);
+
+  const spinner = (
+    <div className="w-[100%] h-[100%] flex items-center justify-center text-xl text-white">
+      <ImSpinner3 className="animate-spin" />
+    </div>
+  );
 
   const {
     register,
@@ -171,7 +178,7 @@ const BabyForm = ({ users, userLoading }) => {
             type="submit"
             disabled={inputDisabled}
           >
-            Done
+            {inputDisabled ? spinner : 'Done'}
           </button>
         </div>
       </form>

@@ -9,7 +9,10 @@ const NoBaby = (props) => {
             <p className="sm:text-[1.2rem] md:text-[1.4rem] text-[0.8rem] text-center">
               No baby found, start now by pressing the button below!
             </p>
-            <AnchorLink href="/CreateBaby" className="px-4 py-2">
+            <AnchorLink
+              href="/CreateBaby"
+              className="px-4 py-2 w-[10rem] h-[3rem]"
+            >
               Create Profile
             </AnchorLink>
           </div>
