@@ -15,3 +15,8 @@ swr library for fetch requests.
 Vaccination reminder.  
 User profile pic upload.  
 Totals for today can also display other dates.
+
+test account:  
+babytest4@babytest.com  
+test pw:  
+babytester  
